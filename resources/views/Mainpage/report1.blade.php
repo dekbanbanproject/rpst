@@ -224,11 +224,14 @@
       </div>
 
     </div>
-  </section>
-  <!--================Food menu section end =================-->
+</section>
+<!--================Food menu section end =================-->
   <br>
 
-<script src="{{ asset('google/Charts.js') }}"></script>
+
+
+
+  <script src="{{ asset('google/Charts.js') }}"></script>
 <script type="text/javascript">
     google.charts.load("current", {packages:["corechart"]});
        google.charts.setOnLoadCallback(drawChart);

@@ -340,4 +340,163 @@ function storesub(Request $request)
     }
 //=========================================================//
    
+function unit(Request $request)
+    {
+    if (session()->has('LogedUser')) {
+        $data = User::where('id','=',session('LogedUser'))->first();
+        }
+        $unit = Units::get();
+
+        $usercount = User::count();
+        $pocount = Position::count();
+        $stmcount = Store_main::count();
+        $stscount = Store_sub::count();
+        $unitcount = Units::count();
+        $catcount = Category::count();
+        $prodcount = Products::count();
+
+        $posit = Position::get();
+
+        return view('setting/units',[
+            'data'=>$data,'units'=>$unit,'posits'=>$posit,               
+            'usercount'=>$usercount, 'pocount'=>$pocount, 'stmcount'=>$stmcount, 'stscount'=>$stscount,
+            'unitcount'=>$unitcount, 'catcount'=>$catcount, 'prodcount'=>$prodcount,
+        ]);
+    }
+    function unit_save(Request $request)
+    {
+        $add= new Units();
+        $add->UNITS_NAME = $request->UNITS_NAME;
+        $add->save();
+        return redirect()->route('per.unit');
+    }
+    function unit_update(Request $request)
+    {
+        $id = $request->UNITS_ID;
+        $update = Units::find($id);
+        $update->UNITS_NAME = $request->UNITS_NAME;
+        $update->save();
+
+        return redirect()->route('per.unit');
+    }
+    function unit_delete(Request $request,$id)
+    {
+        Units::destroy($id);
+        return redirect()->route('per.unit');
+    }
+    //=========================================================//
+   
+function category(Request $request)
+{
+if (session()->has('LogedUser')) {
+    $data = User::where('id','=',session('LogedUser'))->first();
+    }
+    $cat = Category::get();
+
+    $usercount = User::count();
+    $pocount = Position::count();
+    $stmcount = Store_main::count();
+    $stscount = Store_sub::count();
+    $unitcount = Units::count();
+    $catcount = Category::count();
+    $prodcount = Products::count();
+
+    $posit = Position::get();
+   
+    return view('setting/categorys',[
+        'data'=>$data,'cats'=>$cat,'posits'=>$posit,           
+        'usercount'=>$usercount, 'pocount'=>$pocount, 'stmcount'=>$stmcount, 'stscount'=>$stscount,
+        'unitcount'=>$unitcount, 'catcount'=>$catcount, 'prodcount'=>$prodcount,
+    ]);
+}
+function category_save(Request $request)
+{
+    $add= new Category();
+    $add->CAT_NAME = $request->CAT_NAME;
+    $add->save();
+    return redirect()->route('per.category');
+}
+function category_update(Request $request)
+{
+    $id = $request->CAT_ID;
+    $update = Category::find($id);
+    $update->CAT_NAME = $request->CAT_NAME;
+    $update->save();
+
+    return redirect()->route('per.category');
+}
+function category_delete(Request $request,$id)
+{
+    Category::destroy($id);
+    return redirect()->route('per.category');
+}
+//=========================================================//
+  
+    function products(Request $request)
+    {
+    if (session()->has('LogedUser')) {
+        $data = User::where('id','=',session('LogedUser'))->first();
+        }
+        $pro = Products::get();
+
+        $usercount = User::count();
+        $pocount = Position::count();
+        $stmcount = Store_main::count();
+        $stscount = Store_sub::count();
+        $unitcount = Units::count();
+        $catcount = Category::count();
+        $prodcount = Products::count();
+
+        $posit = Position::get();
+        $unit = Units::get();
+        $cat = Category::get();
+        return view('setting/products',[
+            'data'=>$data,'pros'=>$pro,'posits'=>$posit,'units'=>$unit, 'cats'=>$cat,                
+            'usercount'=>$usercount, 'pocount'=>$pocount, 'stmcount'=>$stmcount, 'stscount'=>$stscount,
+            'unitcount'=>$unitcount, 'catcount'=>$catcount, 'prodcount'=>$prodcount,
+        ]);
+    }
+    function products_save(Request $request)
+    {
+        $add= new Products();
+        $add->PRO_CODE = $request->PRO_CODE;
+        $add->PRO_NAME = $request->PRO_NAME;
+        $add->PRO_QTY = $request->PRO_QTY;
+        $add->PRO_UNIT = $request->PRO_UNIT;
+        $add->PRO_CAT = $request->PRO_CAT;
+        $add->PRO_PRICE = $request->PRO_PRICE;
+        if($request->hasFile('img')){
+            $file = $request->file('img');
+            $contents = $file->openFile()->fread($file->getSize());
+            $add->PRO_PIC = $contents;
+        }
+        $add->save();
+        return redirect()->route('per.products');
+    }
+    function products_update(Request $request)
+    {
+        $id = $request->PRO_ID;
+        $update = Products::find($id);
+        $update->PRO_CODE = $request->PRO_CODE;
+        $update->PRO_NAME = $request->PRO_NAME;
+        $update->PRO_QTY = $request->PRO_QTY;
+        $update->PRO_UNIT = $request->PRO_UNIT;
+        $update->PRO_CAT = $request->PRO_CAT;
+        $update->PRO_PRICE = $request->PRO_PRICE;
+        if($request->hasFile('img')){
+            $file = $request->file('img');
+            $contents = $file->openFile()->fread($file->getSize());
+            $update->PRO_PIC = $contents;
+        }
+        $update->save();
+
+        return redirect()->route('per.products');
+    }
+    function products_delete(Request $request,$id)
+    {
+        Products::destroy($id);
+        return redirect()->route('per.products');
+    }
+//=========================================================//
+
 }

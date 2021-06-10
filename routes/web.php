@@ -8,12 +8,13 @@ use App\Http\Controllers\ScanOpdController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StoreSettingController;
+use App\Http\Controllers\FontobtController;
 use Illuminate\Support\Facades\DB;
 
 
 Route::resource('first', 'FirstController');
 
-// Route::get('/', 'FontendController@welcome')->name('Per.welcome');
+Route::get('/',[FontobtController::class,'welcome'])->name('Per.welcome');
 Route::post('report_searchfont','FontendController@report_searchfont')->name('Per.report_searchfont');
 
 // Route::get('mcontact', 'FontendController@mcontact')->name('Per.mcontact');
@@ -24,7 +25,7 @@ Route::get('qrLogin', ['uses' => 'QrLoginController@index']);
 Route::get('qrLogin-option1', ['uses' => 'QrLoginController@indexoption2']);
 Route::post('qrLogin', ['uses' => 'QrLoginController@checkUser']);
 
-Route::get('/',[FontendController::class,'welcome'])->name('Per.welcome');
+// Route::get('/',[FontendController::class,'welcome'])->name('Per.welcome');
 Route::get('mcontact',[FontendController::class,'mcontact'])->name('Per.mcontact');
 Route::get('login',[QrLoginController::class,'login']);
 Route::get('register',[QrLoginController::class,'register']);
@@ -84,7 +85,22 @@ Route::post('setting/storesub_save',[StoreSettingController::class,'storesub_sav
 Route::post('setting/storesub_update',[StoreSettingController::class,'storesub_update'])->name('per.storesub_update');
 Route::get('setting/storesub_delete/{id}',[StoreSettingController::class,'storesub_delete'])->name('per.storesub_delete');
 
-//=======================Start==========Clinic========================//
+Route::get('setting/unit',[StoreSettingController::class,'unit'])->name('per.unit');
+Route::post('setting/unit_save',[StoreSettingController::class,'unit_save'])->name('per.unit_save');
+Route::post('setting/unit_update',[StoreSettingController::class,'unit_update'])->name('per.unit_update');
+Route::get('setting/unit_delete/{id}',[StoreSettingController::class,'unit_delete'])->name('per.unit_delete');
+
+Route::get('setting/category',[StoreSettingController::class,'category'])->name('per.category');
+Route::post('setting/category_save',[StoreSettingController::class,'category_save'])->name('per.category_save');
+Route::post('setting/category_update',[StoreSettingController::class,'category_update'])->name('per.category_update');
+Route::get('setting/category_delete/{id}',[StoreSettingController::class,'category_delete'])->name('per.category_delete');
+
+Route::get('setting/products',[StoreSettingController::class,'products'])->name('per.products');
+Route::post('setting/products_save',[StoreSettingController::class,'products_save'])->name('per.products_save');
+Route::post('setting/products_update',[StoreSettingController::class,'products_update'])->name('per.products_update');
+Route::get('setting/products_delete/{id}',[StoreSettingController::class,'products_delete'])->name('per.products_delete');
+
+//=======================Start==========Clinic=================products=======//
 
 Route::get('opd',[ScanOpdController::class,'opd'])->name('scan.opd');
 Route::get('opd_search',[ScanOpdController::class,'opd_search'])->name('scan.opd_search');
@@ -137,30 +153,30 @@ Route::prefix('report')->group(function(){
 
 });
 
-Route::match(['get','post'],'setting/unit/{idstore}/{iduser}','ClinicsettingController@unit')->name('setting.unit');
-Route::match(['get','post'],'setting/unit_save','ClinicsettingController@unit_save')->name('setting.unit_save');
-Route::match(['get','post'],'setting/unit_update','ClinicsettingController@unit_update')->name('setting.unit_update');
-Route::match(['get','post'],'setting/unitdestroy/{idstore}/{iduser}/{id}', 'ClinicsettingController@unitdestroy')->name('setting.unitdestroy');
+// Route::match(['get','post'],'setting/unit/{idstore}/{iduser}','ClinicsettingController@unit')->name('setting.unit');
+// Route::match(['get','post'],'setting/unit_save','ClinicsettingController@unit_save')->name('setting.unit_save');
+// Route::match(['get','post'],'setting/unit_update','ClinicsettingController@unit_update')->name('setting.unit_update');
+// Route::match(['get','post'],'setting/unitdestroy/{idstore}/{iduser}/{id}', 'ClinicsettingController@unitdestroy')->name('setting.unitdestroy');
 
-Route::match(['get','post'],'setting/category/{idstore}/{iduser}','ClinicsettingController@category')->name('setting.category');
-Route::match(['get','post'],'setting/category_save','ClinicsettingController@category_save')->name('setting.category_save');
-Route::match(['get','post'],'setting/category_update','ClinicsettingController@category_update')->name('setting.category_update');
-Route::match(['get','post'],'setting/categorydestroy/{idstore}/{iduser}/{id}', 'ClinicsettingController@categorydestroy')->name('setting.categorydestroy');
+// Route::match(['get','post'],'setting/category/{idstore}/{iduser}','ClinicsettingController@category')->name('setting.category');
+// Route::match(['get','post'],'setting/category_save','ClinicsettingController@category_save')->name('setting.category_save');
+// Route::match(['get','post'],'setting/category_update','ClinicsettingController@category_update')->name('setting.category_update');
+// Route::match(['get','post'],'setting/categorydestroy/{idstore}/{iduser}/{id}', 'ClinicsettingController@categorydestroy')->name('setting.categorydestroy');
 
 Route::match(['get','post'],'setting/locate/{idstore}/{iduser}','ClinicsettingController@locate')->name('setting.locate');
 Route::match(['get','post'],'setting/locate_save','ClinicsettingController@locate_save')->name('setting.locate_save');
 Route::match(['get','post'],'setting/locate_update','ClinicsettingController@locate_update')->name('setting.locate_update');
 Route::match(['get','post'],'setting/locatedestroy/{idstore}/{iduser}/{id}', 'ClinicsettingController@locatedestroy')->name('setting.locatedestroy');
 
-Route::match(['get','post'],'setting/drug/{idstore}/{iduser}','ClinicsettingController@drug')->name('setting.drug');
-Route::match(['get','post'],'setting/drug_excel','ClinicsettingController@drug_excel')->name('setting.drug_excel');
-Route::match(['get','post'],'setting/drug_export_excel/{idstore}/{iduser}','ClinicsettingController@drug_export_excel')->name('setting.drug_export_excel');
+// Route::match(['get','post'],'setting/drug/{idstore}/{iduser}','ClinicsettingController@drug')->name('setting.drug');
+// Route::match(['get','post'],'setting/drug_excel','ClinicsettingController@drug_excel')->name('setting.drug_excel');
+// Route::match(['get','post'],'setting/drug_export_excel/{idstore}/{iduser}','ClinicsettingController@drug_export_excel')->name('setting.drug_export_excel');
 
-Route::match(['get','post'],'setting/drug_create/{idstore}/{iduser}','ClinicsettingController@drug_create')->name('setting.drug_create');
-Route::match(['get','post'],'setting/drug_save','ClinicsettingController@drug_save')->name('setting.drug_save');
-Route::match(['get','post'],'setting/drug_edit/{idstore}/{iduser}/{id}','ClinicsettingController@drug_edit')->name('setting.drug_edit');
-Route::match(['get','post'],'setting/drug_update','ClinicsettingController@drug_update')->name('setting.drug_update');
-Route::match(['get','post'],'setting/drugdestroy/{idstore}/{iduser}/{id}', 'ClinicsettingController@drugdestroy')->name('setting.drugdestroy');
+// Route::match(['get','post'],'setting/drug_create/{idstore}/{iduser}','ClinicsettingController@drug_create')->name('setting.drug_create');
+// Route::match(['get','post'],'setting/drug_save','ClinicsettingController@drug_save')->name('setting.drug_save');
+// Route::match(['get','post'],'setting/drug_edit/{idstore}/{iduser}/{id}','ClinicsettingController@drug_edit')->name('setting.drug_edit');
+// Route::match(['get','post'],'setting/drug_update','ClinicsettingController@drug_update')->name('setting.drug_update');
+// Route::match(['get','post'],'setting/drugdestroy/{idstore}/{iduser}/{id}', 'ClinicsettingController@drugdestroy')->name('setting.drugdestroy');
 
 Route::match(['get','post'],'setting/order/{idstore}/{iduser}','ClinicsettingController@order')->name('setting.order');
 Route::match(['get','post'],'setting/order_add/{idstore}/{iduser}','ClinicsettingController@order_add')->name('setting.order_add');

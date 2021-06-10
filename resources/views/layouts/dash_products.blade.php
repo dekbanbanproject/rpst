@@ -101,9 +101,9 @@
                         <li><a class="menu-item" href="{{url('setting/infoperson')}}"><i class="la la-user text-danger mr-1"></i><span>บุคลากร</span><span class="badge badge-danger right ml-3">&nbsp;{{$usercount}}&nbsp;</span></a></li>                      
                         <li><a class="menu-item" href="{{url('setting/storemains')}}"><i class="la la-hospital-o text-danger mr-1"></i><span>คลังหลัก</span><span class="badge badge-danger right ml-3">&nbsp;{{$stmcount}}&nbsp;</span></a></li>  
                         <li><a class="menu-item" href="{{url('setting/storesub')}}"><i class="la la-institution text-danger mr-1"></i><span>คลังย่อย</span><span class="badge badge-danger right ml-3">&nbsp;{{$stscount}}&nbsp;</span></a></li>  
-                        <li><a class="menu-item" href="{{url('')}}"><i class="la la-flask text-danger mr-1"></i><span>หน่วยนับ</span><span class="badge badge-danger right ml-3">&nbsp;{{$unitcount}}&nbsp;</span></a></li> 
-                        <li><a class="menu-item" href="{{url('')}}"><i class="la la-object-group text-danger mr-1"></i><span>หมวดหมู่</span><span class="badge badge-danger right ml-3">&nbsp;{{$catcount}}&nbsp;</span></a></li> 
-                        <li><a class="menu-item" href="{{url('')}}"><i class="la la-clipboard text-danger mr-1"></i><span >รายการสินค้า</span><span class="badge badge-danger right ml-3">&nbsp;{{$prodcount}}&nbsp;</span></a></li> 
+                        <li><a class="menu-item" href="{{url('setting/unit')}}"><i class="la la-flask text-danger mr-1"></i><span>หน่วยนับ</span><span class="badge badge-danger right ml-3">&nbsp;{{$unitcount}}&nbsp;</span></a></li> 
+                        <li><a class="menu-item" href="{{url('setting/category')}}"><i class="la la-object-group text-danger mr-1"></i><span>หมวดหมู่</span><span class="badge badge-danger right ml-3">&nbsp;{{$catcount}}&nbsp;</span></a></li> 
+                        <li><a class="menu-item" href="{{url('setting/products')}}"><i class="la la-clipboard text-danger mr-1"></i><span >รายการสินค้า</span><span class="badge badge-danger right ml-3">&nbsp;{{$prodcount}}&nbsp;</span></a></li> 
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="{{url('')}}"><i class="la la-paste text-warning mr-1"></i><span class="menu-title" data-i18n="Appointment">สั่งซื้อ</span><span class="badge badge-warning right">&nbsp;2&nbsp;</span></a></li>
