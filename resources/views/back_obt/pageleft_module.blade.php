@@ -42,7 +42,7 @@ function DateThai($strDate)
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
                                         <li>                                           
-                                            <button type="button" class="btn btn-m btn-success box-shadow-2 btn-min-width pull-right mr-2" data-toggle="modal" data-target="#rotateInposition">เพิ่มหน้าหลัก <i class="ft-plus-circle ml-1"></i>
+                                            <a href="{{url('back_obt/pageleft_module_add')}}" class="btn btn-m btn-success box-shadow-2 btn-min-width pull-right mr-2">เพิ่มหน้าหลัก <i class="ft-plus-circle ml-1"></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -53,32 +53,41 @@ function DateThai($strDate)
                                         <table id="example" class="table table-striped table-bordered sourced-data" style="width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th class="border-top-0">ลำดับ</th>
+                                                <th class="border-top-0" width="5%;">ลำดับ</th>
                                                 <th class="border-top-0">หน้าหลัก</th>                                              
                                                 <th class="border-top-0" width="15%;">วันที่</th>
-                                                <th class="border-top-0">หน้าย่อย</th>                                               
-                                                <th class="border-top-0">แก้ไข</th>
-                                                <th class="border-top-0">ลบ</th>
+                                                <th class="border-top-0" width="5%;">สถานะ</th>                                               
+                                                <th class="border-top-0" width="5%;">แก้ไข</th>
+                                                <th class="border-top-0" width="5%;">ลบ</th>
+                                                <th class="border-top-0" width="5%;">หน้าย่อย</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             
                                             @foreach ($pageModules as $key => $u)
                                                 <tr class="pull-up">
-                                                    <td class="text-truncate">{{$key+1}}</td>
-                                                    <td class="text-padding">{{$u->module_name}}</td>
+                                                    <td class="text-truncate" width="5%;">{{$key+1}}</td>
+                                                    <td class="text-padding">{!!$u->module_name!!}</td>                                                  
                                                     <td class="text-padding" width="15%;">{{Datethai($u->updated_at)}}</td>
-                                                    <td class="text-padding"><a href="{{url('back_obt/pageleft_module_sub/'.$u->module_id)}}" ><i class="la la-copy font-large-1" style="color:rgb(169, 230, 4)"></i></a></td>                                               
-                                                    <td > 
-                                                        <a href="" data-toggle="modal" data-target="#rotateInDownRight{{$u->module_id}}"><i class="la la-edit font-large-1" style="color:rgb(255, 72, 0)"></i></a>                                                      
+                                                    <td class="text-padding">
+                                                        <fieldset>
+                                                            <div class="float-left">
+                                                                <input type="checkbox" class="switchBootstrap" id="switchBootstrap18" data-on-color="success" data-off-color="danger" checked />
+                                                            </div>
+                                                        </fieldset>
+                                                    </td>                                                                                                
+                                                    <td width="5%;"> 
+                                                        {{-- <a href="" data-toggle="modal" data-target="#rotateInDownRight{{$u->module_id}}"><i class="la la-edit font-large-1" style="color:rgb(255, 72, 0)"></i></a> --}}
+                                                        <a href="{{url('back_obt/pageleft_module_edit/'.$u->module_id)}}"><i class="la la-edit font-large-1" style="color:rgb(255, 72, 0)"></i></a>                                                      
                                                     </td> 
-                                                    <td >   
+                                                    <td width="5%;">   
                                                         <a href="{{url('back_obt/pageleft_module_delete/'.$u->module_id)}}"> <i class="la la-trash font-large-1" style="color:rgb(243, 12, 4)"></i></a>
-                                                    </td>                                                  
+                                                    </td>  
+                                                    <td class="text-padding" width="5%;"><a href="{{url('back_obt/pageleft_module_sub/'.$u->module_id)}}" ><i class="la la-copy font-large-1" style="color:rgb(169, 230, 4)"></i></a></td>                                                  
                                                 </tr>
 
                                                     <!-- Modal แก้ไขข้อมูลหน้าหลัก-->
-                                                    <div class="modal animated rotateInDownRight text-left" id="rotateInDownRight{{$u->module_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel64" aria-hidden="true">
+                                                    {{-- <div class="modal animated rotateInDownRight text-left" id="rotateInDownRight{{$u->module_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel64" aria-hidden="true">
                                                         <div class="modal-dialog " role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header bg-primary ">
@@ -115,7 +124,7 @@ function DateThai($strDate)
                                                             </div>
                                                         </form>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                            @endforeach
                                            
@@ -135,8 +144,8 @@ function DateThai($strDate)
   <!-- END: Content-->
 
  <!-- Modal เพิ่มข้อมูลหน้าหลัก-->
- <div class="modal animated rotateInDownLeft text-left" id="rotateInposition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel64" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+ {{-- <div class="modal animated rotateInDownLeft text-left" id="rotateInposition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel64" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary ">
                 <h4 class="modal-title text-white" id="myModalLabel64">เพิ่มข้อมูลหน้าหลัก </h4>
@@ -146,7 +155,6 @@ function DateThai($strDate)
             </div>
     <form action="{{ route('obt.pageleft_module_save') }}" method="POST" enctype="multipart/form-data">
         @csrf 
-        {{-- <input type="hidden" id="id_update" name="id_update" value="{{$u->id}}"> --}}
             <div class="modal-body">
                 <div class="row">                   
                     <div class="form-group col-12 mb-2">
@@ -159,7 +167,13 @@ function DateThai($strDate)
                                         <i class="ft-layout font-large-1 line-height-1 text-muted icon-align"></i>
                                     </div>
                                 </div>
-                            </div>                           
+                            </div> 
+                            <div class="col-md-12">
+                                <label>รายละเอียด : </label>
+                                <div class="form-group ">
+                                    <textarea class="form-control" id="summary-ckeditor" name="summary_ckeditor"></textarea>                              
+                                </div>
+                            </div>                             
                        </div>                       
                     </div>                                       
                 </div>              
@@ -172,21 +186,39 @@ function DateThai($strDate)
         </div>
     </form>
     </div>
-</div>
+</div> --}}
 
     @endsection
     @section('footer')
     <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/material-vendors.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/charts/chart.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+
     <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+
     <script src="{{ asset('app-assets/js/scripts/pages/appointment.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/modal/components-modal.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/tables/datatables-extensions/datatables-sources.js') }}"></script>
+    
 
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/switchery.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/pages/material-app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/forms/switch.js') }}"></script>
+
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'summary-ckeditor', {
+            height: 200,
+            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        });
+        </script>
 
 @endsection
 

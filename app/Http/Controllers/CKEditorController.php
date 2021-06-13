@@ -53,7 +53,6 @@ class CKEditorController extends Controller
     public function store(Request $request)
     {
         $add = new Pageleftmodule_sub();
-
         $idmodule = $request->module_id;
         $idm = Pageleftmodule::where('module_id','=',$idmodule)->first();
         $add->module_id = $idm->module_id;

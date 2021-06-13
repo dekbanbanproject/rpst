@@ -62,7 +62,9 @@ Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // *****
 Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // ******** dashboard_obt ***********//
 
 Route::get('back_obt/pageleft_module',[BackobtController::class,'pageleft_module'])->name('obt.pageleft_module'); // ******** pageleft_ones ***********//
+Route::get('back_obt/pageleft_module_add',[BackobtController::class,'pageleft_module_add'])->name('obt.pageleft_module_add'); 
 Route::post('back_obt/pageleft_module_save',[BackobtController::class,'pageleft_module_save'])->name('obt.pageleft_module_save');
+Route::get('back_obt/pageleft_module_edit/{id}',[BackobtController::class,'pageleft_module_edit'])->name('obt.pageleft_module_edit'); 
 Route::post('back_obt/pageleft_module_update',[BackobtController::class,'pageleft_module_update'])->name('obt.pageleft_module_update');
 Route::get('back_obt/pageleft_module_delete/{id}',[BackobtController::class,'pageleft_module_delete'])->name('obt.pageleft_module_delete');
 

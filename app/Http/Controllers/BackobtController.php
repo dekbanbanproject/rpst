@@ -77,18 +77,69 @@ class BackobtController extends Controller
             'page5'=>$page5, 'pageModule_count'=>$pageModule_count, 'pageModules'=>$pageModule,
         ]);
     }
-    function pageleft_module_save(Request $request)
+    function pageleft_module_add(Request $request)
     {
-        $add= new Pageleftmodule();
+    if (session()->has('LogedUser')) {
+        $data = User::where('id','=',session('LogedUser'))->first();
+        }
+        $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
+        ->get();
+
+        $pageModule_count = Pageleftmodule::count();
+        $page1 = Pageleft_one::count();
+        $page2 = Pageleft_two::count();
+        $page3 = Pageleft_tree::count();
+        $page4 = Pageleft_four::count();
+        $page5 = Pageleft_five::count();
+      
+        $posit = Position::get();
+        $page = Pageleft_two::get();
+        $pageModule = Pageleftmodule::get();
+
+        return view('back_obt.pageleft_module_add',[
+            'data'=>$data,'user'=>$user,'posits'=>$posit,'pages'=>$page,             
+            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
+            'page5'=>$page5, 'pageModule_count'=>$pageModule_count, 'pageModules'=>$pageModule,
+        ]);
+    }
+    function pageleft_module_save(Request $request)
+    {        
+        $add = new Pageleftmodule();
         $add->module_name = $request->module_name;
-        $add->save();
+        $add->module_detail = $request->summary_ckeditor;
+        $add->save(); 
         return redirect()->route('obt.pageleft_module');
     }
+    function pageleft_module_edit(Request $request,$id)
+    {
+    if (session()->has('LogedUser')) {
+        $data = User::where('id','=',session('LogedUser'))->first();
+        }
+        $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
+        ->get();
+
+        $pageModule_count = Pageleftmodule::count();
+        $page1 = Pageleft_one::count();
+        $page2 = Pageleft_two::count();
+        $page3 = Pageleft_tree::count();
+        $page4 = Pageleft_four::count();
+        $page5 = Pageleft_five::count();
+              
+        $pageModule = Pageleftmodule::where('module_id','=',$id)->first();
+
+        return view('back_obt.pageleft_module_edit',[
+            'data'=>$data,'user'=>$user,            
+            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
+            'page5'=>$page5, 'pageModule_count'=>$pageModule_count, 'pageModules'=>$pageModule,
+        ]);
+    }
+
     function pageleft_module_update(Request $request)
     {
         $id = $request->module_id;
         $update = Pageleftmodule::find($id);
         $update->module_name = $request->module_name;
+        $update->module_detail = $request->summary_ckeditor;
         $update->save();
 
         return redirect()->route('obt.pageleft_module');
@@ -159,7 +210,6 @@ class BackobtController extends Controller
     }
     public function pageleft_module_sub_save(Request $request)
     {
-        // Validate the inputs
         $request->validate([
             'modulsub_name' => 'required'
         ]);
@@ -167,8 +217,7 @@ class BackobtController extends Controller
         $idmodule = $request->module_id;
         $idm = Pageleftmodule::where('module_id','=',$idmodule)->first();
         $mid = $idm->module_id;
-        $mnam = $idm->module_name;
-        // ensure the request has a file before we attempt anything else.
+        $mnam = $idm->module_name;      
         if ($request->hasFile('img')) {
 
             $request->validate([

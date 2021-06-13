@@ -17,7 +17,9 @@ class CreatePageleftmodulesTable extends Migration
         {
         Schema::create('pageleftmodules', function (Blueprint $table) {
             $table->increments('module_id',11);
-            $table->string('module_name',255)->nullable();           
+            $table->string('module_name',255)->nullable(); 
+            $table->mediumText('module_detail')->nullable();   
+            $table->enum('status', ['true', 'false'])->default('false'); 
             $table->timestamps();
         });
     }

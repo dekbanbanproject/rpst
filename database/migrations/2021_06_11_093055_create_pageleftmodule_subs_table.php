@@ -18,7 +18,7 @@ class CreatePageleftmoduleSubsTable extends Migration
         Schema::create('pageleftmodule_subs', function (Blueprint $table) {
             $table->increments('modulsub_id',11);
             $table->string('modulsub_name',255)->nullable();  
-            $table->string('modulsub_detail',500)->nullable();  
+            $table->mediumText('modulsub_detail')->nullable();  
             $table->string('modulsub_img');  
             $table->string('module_id',11)->nullable();    
             $table->string('module_name',255)->nullable();       
