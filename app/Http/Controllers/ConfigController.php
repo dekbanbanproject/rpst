@@ -26,6 +26,13 @@ class ConfigController extends Controller
 
         $user = User::where('id','=',$data->id)->get();
         $usercount = User::count();
+        $pocount = Position::count();
+        $stmcount = Store_main::count();
+        $stscount = Store_sub::count();
+        $unitcount = Units::count();
+        $catcount = Category::count();
+        $prodcount = Products::count();
+
         $countad = User::where('admin','=','on')->count();
         $countre = User::count('read');
         $countwr = User::count('write');
@@ -38,6 +45,8 @@ class ConfigController extends Controller
             'user'=>$user,
             'usercount'=>$usercount,
             'total'=>$total,
+            'usercount'=>$usercount, 'pocount'=>$pocount, 'stmcount'=>$stmcount, 'stscount'=>$stscount,
+            'unitcount'=>$unitcount, 'catcount'=>$catcount, 'prodcount'=>$prodcount,
         ]);
     }
     public static function countad ($id)

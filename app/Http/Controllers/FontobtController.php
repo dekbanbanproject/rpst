@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Clinic_sym;
-use App\Room;
-use App\Orders;
-use App\Orders_detail;
-use App\Supplies;
-use App\Person;
-use App\Products;
-use App\Receive;
-use App\Rent_Detail;
-use App\Rent;
+use App\Models\Category;
+use App\Models\Pageleft_one;
+use App\Models\Pageleft_two;
+use App\Models\Pageleft_tree;
+use App\Models\Pageleft_four;
+use App\Models\Pageleft_five;
+use App\Models\Pageleftmodule;
 use App\Contact;
 use Image;
 use PDF;
@@ -26,10 +23,12 @@ class FontobtController extends Controller
 //==========================================================//
   public function welcome(Request $request)
     {
-        // $data_hos = DB::connection('mysql2')->table('opdconfig')->get();
+      $page1 = Pageleft_one::get();
+      $page2 = Pageleft_two::get();
 
       return view('font_obt.obt_main',[
-           
+        'page1'=>$page1,
+        'page2'=>$page2,
         ]);
     }
 

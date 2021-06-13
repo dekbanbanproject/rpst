@@ -36,21 +36,21 @@
                     </ol>
                     <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="{{ asset('/img/obt/S1.jpg') }}" width="1124px" height="350px"alt="...">
+                        <img src="{{ asset('/img/obt/S1.jpg') }}" width="1200px" height="350px"alt="...">
                         <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Some representative placeholder content for the first slide.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ asset('/img/obt/s2.jpg') }}" width="1124px" height="350px"alt="...">
+                        <img src="{{ asset('/img/obt/s2.jpg') }}" width="1200px" height="350px"alt="...">
                         <div class="carousel-caption d-none d-md-block">
                         <h5>Second slide label</h5>
                         <p>Some representative placeholder content for the second slide.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ asset('/img/obt/S1.jpg') }}" class="d-block w-100" width="1124px" height="350px"alt="...">
+                        <img src="{{ asset('/img/obt/S1.jpg') }}" class="d-block w-100" width="1200px" height="350px"alt="...">
                         <div class="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
@@ -74,61 +74,28 @@
 
  <!--================ Food menu section start =================-->
  <section class="section ">
-    <div class="container" style="width: 90%;">
-     
+    <div class="container" style="width: 90%;">     
             <div class="row">
                 <div class="col-lg-3 mt-1 p-0">              
                       <div class="card border-top-pink border-top-3 border-bottom-blue border-bottom-3 box-shadow-3">
-                          <div class="card-head">
+                          <div class="card-head bg-info">
                               <div class="media p-1">
                                   <div class="media-left pr-1"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="{{ asset('/img/users/head.png') }}" alt="avatar"><i></i></span></div>
                                   <div class="media-body media-middle">
-                                      <h5 class="media-heading">Page</h5>
+                                      <h5 class="media-heading ml-4" style="color:white">หน้าแรก</h5>
                                   </div>
                               </div>
                           </div>                           
                           <div class="card-body border-top-blue-grey border-top-lighten-5">
                               <div class="list-group">                                 
                                     <div class="list-group list-group-messages">
-                                      <a href="#" class="list-group-item list-group-item-action" id="inbox-menu">
-                                          <div class="d-inline mr-100">
-                                              <i class="ft-mail"></i>
-                                          </div>
-                                          Inbox
-                                          <span class="badge badge-success badge-pill badge-round float-right">5</span>
-                                      </a>
-                                      <a href="#" class="list-group-item list-group-item-action">
-                                          <div class="d-inline mr-25">
-                                              <i class="ft-play"></i>
-                                          </div>
-                                          Sent
-                                      </a>
-                                      <a href="#" class="list-group-item list-group-item-action">
-                                          <div class="d-inline mr-25">
-                                              <i class="ft-edit-1"></i>
-                                          </div> Draft
-                                      </a>
-                                      <a href="#" class="list-group-item list-group-item-action">
-                                          <div class="d-inline mr-25">
-                                              <i class="ft-star"></i>
-                                          </div>
-                                          Starred
-                                      </a>
-                                      <a href="#" class="list-group-item list-group-item-action">
-                                          <div class="d-inline mr-25">
-                                              <i class="ft-info"></i>
-                                          </div>
-                                          Spam
-                                          <span class="badge badge-warning badge-pill badge-round float-right">3</span>
-                                      </a>
-                                      <a href="#" class="list-group-item list-group-item-action">
-                                          <div class="d-inline mr-25">
-                                              <i class="ft-trash-2"></i>
-                                          </div>
-                                          Trash
-                                      </a>
-                                  </div>
-                                  
+                                        @foreach ($page1 as $key => $u)
+                                            <a href="#" class="list-group-item list-group-item-action" id="inbox-menu">
+
+                                                <div class="d-inline mr-100"><i class="ft-plus-circle mr-1 text-success"></i></div>{{$u->PAGE_LEFT_ONE_NAME}}
+                                            </a>
+                                        @endforeach  
+                                  </div>                                  
                               </div>
                           </div>                           
                       </div> 
@@ -138,61 +105,26 @@
                             <div class="media p-1">
                                 <div class="media-left pr-1"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="{{ asset('/img/users/head.png') }}" alt="avatar"><i></i></span></div>
                                 <div class="media-body media-middle">
-                                    <h5 class="media-heading">Page</h5>
+                                    <h5 class="media-heading">Page 2</h5>
                                 </div>
                             </div>
-                        </div> 
-                        
-                        
+                        </div>      
                      
                         <div class="card-body border-top-blue-grey border-top-lighten-5">
-                          <div class="list-group">                                 
+                            <div class="list-group">                                 
                                 <div class="list-group list-group-messages">
-                                  <a href="#" class="list-group-item list-group-item-action" id="inbox-menu">
-                                      <div class="d-inline mr-100">
-                                          <i class="ft-mail"></i>
-                                      </div>
-                                      Inbox
-                                      <span class="badge badge-success badge-pill badge-round float-right">5</span>
-                                  </a>
-                                  <a href="#" class="list-group-item list-group-item-action">
-                                      <div class="d-inline mr-25">
-                                          <i class="ft-play"></i>
-                                      </div>
-                                      Sent
-                                  </a>
-                                  <a href="#" class="list-group-item list-group-item-action">
-                                      <div class="d-inline mr-25">
-                                          <i class="ft-edit-1"></i>
-                                      </div> Draft
-                                  </a>
-                                  <a href="#" class="list-group-item list-group-item-action">
-                                      <div class="d-inline mr-25">
-                                          <i class="ft-star"></i>
-                                      </div>
-                                      Starred
-                                  </a>
-                                  <a href="#" class="list-group-item list-group-item-action">
-                                      <div class="d-inline mr-25">
-                                          <i class="ft-info"></i>
-                                      </div>
-                                      Spam
-                                      <span class="badge badge-warning badge-pill badge-round float-right">3</span>
-                                  </a>
-                                  <a href="#" class="list-group-item list-group-item-action">
-                                      <div class="d-inline mr-25">
-                                          <i class="ft-trash-2"></i>
-                                      </div>
-                                      Trash
-                                  </a>
-                              </div>
-                              
-                          </div>
-                      </div>                           
+                                    @foreach ($page2 as $key => $ut)
+                                        <a href="#" class="list-group-item list-group-item-action" id="inbox-menu">
+                                            <div class="d-inline mr-100"><i class="ft-chevrons-left mr-1 text-danger"></i></div>{{$ut->PAGE_LEFT_TWO_NAME}}<span class="badge badge-success badge-pill badge-round float-right">5</span>
+                                        </a>
+                                    @endforeach  
+                                </div>                              
+                            </div>
+                        </div>                           
                   </div>  
                 </div> 
 
-                
+
                 <div class="col-lg-6 mt-1 ">
                 
                         <div class="card ">
@@ -303,15 +235,15 @@
                     </div>
 
                     <div class="card border-top-pink border-top-3 border-bottom-blue border-bottom-3 box-shadow-3">
-                      <div class="card-header">
-                          <h4 class="card-title">Border Large Size</h4>
-                          <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                          <div class="heading-elements">
-                              <ul class="list-inline mb-0">                         
-                                  <li><a data-action="close"><i class="ft-x"></i></a></li>
-                              </ul>
-                          </div>
-                      </div>
+                      
+                        <div class="card-head">
+                            <div class="media">
+                                <a><img src="{{ asset('/img/obt/tel.jpg') }}" width="280px" height="100px"alt="..."></a>                              
+                            </div>
+                             
+                        </div>  
+
+                     
                       <div class="card-content collapse show">
                           <div class="card-body">
                             <a href="#" class="list-group-item list-group-item-action">

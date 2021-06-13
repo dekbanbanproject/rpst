@@ -67,17 +67,14 @@
                 </ul>
                 <ul class="nav navbar-nav">
                     <li class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link"><span class="avatar avatar-online"><img src="{{ asset('/img/users/head.png') }}" alt="avatar"><i></i></span>
-                            <h6 class="user-name"> John Doe</h6><i class="caret"></i>
+                            <h6 class="user-name"> เข้าสู่ระบบ</h6><i class="caret"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#" class="dropdown-item"><i class="ft-user"></i> Edit Profile</a>
-                            <a href="#" class="dropdown-item"><i class="ft-mail"></i> My Inbox</a>
-                            <a href="#" class="dropdown-item">
-                                <i class="ft-check-square"></i> Task</a>
-                            <a href="#" class="dropdown-item"><i class="ft-message-square"></i>
-                                Calender</a>
+                            <a href="{{ route('login')}}" class="dropdown-item"><i class="ft-log-in text-warning mr-2"></i>Login</a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item"><i class="ft-power"></i> Logout</a>
+                            <a href="{{ route('register')}}" class="dropdown-item"><i class="ft-user-plus text-info mr-2"></i> Register</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item"><i class="ft-phone-call text-danger mr-2"></i> ติดต่อเรา</a>
                         </div>
                     </li>
                 </ul>

@@ -62,7 +62,7 @@
                                     <h6 class="font-weight-bold font-medium-2 ml-1">Panel</h6>
                                     <ul class="row mt-2">
                                         <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="{{url('dashboard_store')}}" target="_blank"><i class="la la-inbox font-large-2 text-info mr-1"></i> <p class="font-medium-2 mt-25 mb-50">Store</p></a></li>
-                                        {{-- <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="{{url('scan_dashboard')}}" target="_blank"><i class="la la-inbox font-large-2 text-warning mr-1"></i><p class="font-medium-2 mt-25 mb-50">Scan Opd</p></a></li> --}}
+                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="{{url('dashboard_obt')}}" target="_blank"><i class="la la-inbox font-large-2 text-warning mr-1"></i><p class="font-medium-2 mt-25 mb-50">Obt</p></a></li>
                                      
                                     </ul>
                                 </li>

@@ -9,6 +9,8 @@ use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StoreSettingController;
 use App\Http\Controllers\FontobtController;
+use App\Http\Controllers\BackobtController;
+use App\Http\Controllers\CKEditorController;
 use Illuminate\Support\Facades\DB;
 
 
@@ -53,6 +55,65 @@ Route::get('home', 'HomeController@index')->name('home');//****settingdashbord *
 Route::get('dashbord_medical/{idstore}/{iduser}', 'DashbordController@dashbord_medical')->name('dash.dashbord_medical');//****dashbord_medical */
 Route::get('dashbord_home', 'DashbordController@dashbord_home')->name('dash.dashbord_home');//****dashbord_medical */
 
+//******************************** อบต */
+
+Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // ******** dashboard_obt ***********//
+
+Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // ******** dashboard_obt ***********//
+
+Route::get('back_obt/pageleft_module',[BackobtController::class,'pageleft_module'])->name('obt.pageleft_module'); // ******** pageleft_ones ***********//
+Route::post('back_obt/pageleft_module_save',[BackobtController::class,'pageleft_module_save'])->name('obt.pageleft_module_save');
+Route::post('back_obt/pageleft_module_update',[BackobtController::class,'pageleft_module_update'])->name('obt.pageleft_module_update');
+Route::get('back_obt/pageleft_module_delete/{id}',[BackobtController::class,'pageleft_module_delete'])->name('obt.pageleft_module_delete');
+
+Route::get('back_obt/pageleft_module_sub/{idmodule}',[BackobtController::class,'pageleft_module_sub'])->name('obt.pageleft_module_sub'); // ******** pageleft_module_sub ***********//
+Route::post('back_obt/pageleft_module_sub_save',[BackobtController::class,'pageleft_module_sub_save'])->name('obt.pageleft_module_sub_save');
+Route::post('back_obt/pageleft_module_sub_update',[BackobtController::class,'pageleft_module_sub_update'])->name('obt.pageleft_module_sub_update');
+Route::get('back_obt/pageleft_module_sub_delete/{idmodule}/{id}',[BackobtController::class,'pageleft_module_sub_delete'])->name('obt.pageleft_module_sub_delete');
+
+Route::get('ckeditor/image-upload',[BackobtController::class,'ckeditor'])->name('ckeditor.image-upload'); 
+// Route::post('/module/upload_ckeditor',[BackobtController::class,'upload_ckeditor'])->name('ckeditor.upload_ckeditor'); 
+Route::get('/module/file_browser',[BackobtController::class,'file_browser'])->name('ckeditor.file_browser'); 
+
+Route::get('file',[BackobtController::class,'file'])->name('ck.file'); 
+Route::post('upload',[BackobtController::class,'upload'])->name('upload'); 
+// Route::post('upload',[BackobtController::class,'upload'])->name('upload'); 
+
+Route::resource('back_obt/editor','CKEditorController'); //**************************************************ok */
+Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');//************************ ok*/
+Route::post('ckeditor/store', 'CKEditorController@store')->name('ckeditor.store');
+Route::post('ckeditor/update', 'BackobtController@update')->name('ckeditor.update');
+
+Route::get('back_obt/pageleft_ones',[BackobtController::class,'pageleft_ones'])->name('obt.pageleft_ones'); // ******** pageleft_ones ***********//
+Route::post('back_obt/pageleft_ones_save',[BackobtController::class,'pageleft_ones_save'])->name('obt.pageleft_ones_save');
+Route::post('back_obt/pageleft_ones_update',[BackobtController::class,'pageleft_ones_update'])->name('obt.pageleft_ones_update');
+Route::get('back_obt/pageleft_ones_delete/{id}',[BackobtController::class,'pageleft_ones_delete'])->name('obt.pageleft_ones_delete');
+
+Route::get('back_obt/pageleft_twos',[BackobtController::class,'pageleft_twos'])->name('obt.pageleft_twos'); // ******** pageleft_twos ***********//
+Route::post('back_obt/pageleft_twos_save',[BackobtController::class,'pageleft_twos_save'])->name('obt.pageleft_twos_save');
+Route::post('back_obt/pageleft_twos_update',[BackobtController::class,'pageleft_twos_update'])->name('obt.pageleft_twos_update');
+Route::get('back_obt/pageleft_twos_delete/{id}',[BackobtController::class,'pageleft_twos_delete'])->name('obt.pageleft_twos_delete');
+
+
+Route::get('back_obt/pageleft_trees',[BackobtController::class,'pageleft_trees'])->name('obt.pageleft_trees'); // ******** pageleft_trees ***********//
+Route::post('back_obt/pageleft_trees_save',[BackobtController::class,'pageleft_trees_save'])->name('obt.pageleft_trees_save');
+Route::post('back_obt/pageleft_trees_update',[BackobtController::class,'pageleft_trees_update'])->name('obt.pageleft_trees_update');
+Route::get('back_obt/pageleft_trees_delete/{id}',[BackobtController::class,'pageleft_trees_delete'])->name('obt.pageleft_trees_delete');
+
+
+Route::get('back_obt/pageleft_fours',[BackobtController::class,'pageleft_fours'])->name('obt.pageleft_fours'); // ******** pageleft_fours ***********//
+Route::post('back_obt/pageleft_fours_save',[BackobtController::class,'pageleft_fours_save'])->name('obt.pageleft_fours_save');
+Route::post('back_obt/pageleft_fours_update',[BackobtController::class,'pageleft_fours_update'])->name('obt.pageleft_fours_update');
+Route::get('back_obt/pageleft_fours_delete/{id}',[BackobtController::class,'pageleft_fours_delete'])->name('obt.pageleft_fours_delete');
+
+
+Route::get('back_obt/pageleft_fives',[BackobtController::class,'pageleft_fives'])->name('obt.pageleft_fives'); // ******** pageleft_fives ***********//
+Route::post('back_obt/pageleft_fives_save',[BackobtController::class,'pageleft_fives_save'])->name('obt.pageleft_fives_save');
+Route::post('back_obt/pageleft_fives_update',[BackobtController::class,'pageleft_fives_update'])->name('obt.pageleft_fives_update');
+Route::get('back_obt/pageleft_fives_delete/{id}',[BackobtController::class,'pageleft_fives_delete'])->name('obt.pageleft_fives_delete');
+
+
+//*********************************** */
 
 Route::get('dashboard_store',[StoreController::class,'dashboard_store']); // ******** store ***********//
 Route::get('profile',[ConfigController::class,'profile']);
