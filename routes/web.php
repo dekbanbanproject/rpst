@@ -11,23 +11,27 @@ use App\Http\Controllers\StoreSettingController;
 use App\Http\Controllers\FontobtController;
 use App\Http\Controllers\BackobtController;
 use App\Http\Controllers\CKEditorController;
+use App\Http\Controllers\PictureController;
 use Illuminate\Support\Facades\DB;
 
 
 Route::resource('first', 'FirstController');
 
-Route::get('/',[FontobtController::class,'welcome'])->name('Per.welcome');
-Route::post('report_searchfont','FontendController@report_searchfont')->name('Per.report_searchfont');
 
+// Route::post('report_searchfont','FontendController@report_searchfont')->name('Per.report_searchfont');
 // Route::get('mcontact', 'FontendController@mcontact')->name('Per.mcontact');
-Route::post('Fontend/savecontact','FontendController@savecontact')->name('Per.savecontact');
+// Route::post('Fontend/savecontact','FontendController@savecontact')->name('Per.savecontact');
 
-Route::get('QrLogin', 'QrLoginController@index');
-Route::get('qrLogin', ['uses' => 'QrLoginController@index']);
-Route::get('qrLogin-option1', ['uses' => 'QrLoginController@indexoption2']);
-Route::post('qrLogin', ['uses' => 'QrLoginController@checkUser']);
-
+// Route::get('QrLogin', 'QrLoginController@index');
+// Route::get('qrLogin', ['uses' => 'QrLoginController@index']);
+// Route::get('qrLogin-option1', ['uses' => 'QrLoginController@indexoption2']);
+// Route::post('qrLogin', ['uses' => 'QrLoginController@checkUser']);
 // Route::get('/',[FontendController::class,'welcome'])->name('Per.welcome');
+
+//****************************** Font obt *******************************//
+Route::get('/',[FontobtController::class,'welcome'])->name('Per.welcome');
+Route::get('module_show/{id}',[FontobtController::class,'module_show'])->name('obt.module_show');
+
 Route::get('mcontact',[FontendController::class,'mcontact'])->name('Per.mcontact');
 Route::get('login',[QrLoginController::class,'login']);
 Route::get('register',[QrLoginController::class,'register']);
@@ -61,12 +65,34 @@ Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // *****
 
 Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // ******** dashboard_obt ***********//
 
+Route::get('/uploadpic',[PictureController::class,'index']); // ******** pagepicture_slide upload ***********//
+Route::post('/upload/store',[PictureController::class,'store'])->name('obt.upload_store'); 
+Route::post('/uploadpic_delete',[PictureController::class,'uploadpic_delete'])->name('obt.uploadpic_delete');  
+Route::get('back_obt/upload_pic_delete/{id}',[PictureController::class,'upload_pic_delete'])->name('obt.upload_pic_delete');
+
+Route::get('back_obt/pagepicture_slide',[BackobtController::class,'pagepicture_slide'])->name('obt.pagepicture_slide'); // ******** pagepicture_slide ***********//
+Route::get('back_obt/pagepicture_slide_add',[BackobtController::class,'pagepicture_slide_add'])->name('obt.pagepicture_slide_add'); 
+Route::post('back_obt/pagepicture_slide_save',[BackobtController::class,'pagepicture_slide_save'])->name('obt.pagepicture_slide_save');
+Route::get('back_obt/pagepicture_slide_delete/{id}',[BackobtController::class,'pagepicture_slide_delete'])->name('obt.pagepicture_slide_delete');
+Route::get('switchactive_picture',[BackobtController::class,'switchactive_picture'])->name('obt.switchactive_picture');
+
+
+Route::get('back_obt/page_group',[BackobtController::class,'page_group'])->name('obt.page_group'); // ******** page_group ***********//
+Route::post('back_obt/page_group_save',[BackobtController::class,'page_group_save'])->name('obt.page_group_save');
+Route::post('back_obt/page_group_update',[BackobtController::class,'page_group_update'])->name('obt.page_group_update');
+Route::get('back_obt/page_group_delete/{id}',[BackobtController::class,'page_group_delete'])->name('obt.page_group_delete');
+Route::get('switchactive_group',[BackobtController::class,'switchactive_group'])->name('obt.switchactive_group');
+
+
 Route::get('back_obt/pageleft_module',[BackobtController::class,'pageleft_module'])->name('obt.pageleft_module'); // ******** pageleft_ones ***********//
 Route::get('back_obt/pageleft_module_add',[BackobtController::class,'pageleft_module_add'])->name('obt.pageleft_module_add'); 
 Route::post('back_obt/pageleft_module_save',[BackobtController::class,'pageleft_module_save'])->name('obt.pageleft_module_save');
 Route::get('back_obt/pageleft_module_edit/{id}',[BackobtController::class,'pageleft_module_edit'])->name('obt.pageleft_module_edit'); 
 Route::post('back_obt/pageleft_module_update',[BackobtController::class,'pageleft_module_update'])->name('obt.pageleft_module_update');
 Route::get('back_obt/pageleft_module_delete/{id}',[BackobtController::class,'pageleft_module_delete'])->name('obt.pageleft_module_delete');
+Route::get('switchactive_module',[BackobtController::class,'switchactive_module'])->name('obt.switchactive_module');
+
+
 
 Route::get('back_obt/pageleft_module_sub/{idmodule}',[BackobtController::class,'pageleft_module_sub'])->name('obt.pageleft_module_sub'); // ******** pageleft_module_sub ***********//
 Route::post('back_obt/pageleft_module_sub_save',[BackobtController::class,'pageleft_module_sub_save'])->name('obt.pageleft_module_sub_save');

@@ -12,6 +12,11 @@ use App\Models\Pageleft_tree;
 use App\Models\Pageleft_four;
 use App\Models\Pageleft_five;
 use App\Models\Pageleftmodule;
+use App\Models\Pageleftmodule_sub;
+use App\Models\Page_group;
+use App\Models\Page_slidepicture;
+
+
 use App\Contact;
 use Image;
 use PDF;
@@ -23,15 +28,42 @@ class FontobtController extends Controller
 //==========================================================//
   public function welcome(Request $request)
     {
+      // $idgroup = Page_group::where('status','=','true')->first();
+      $mainpage = Pageleftmodule::where('status','=','true')->where('group_id','=','1')->get();
+      $pagegroup = Page_group::where('status','=','true')->where('group_id','<>','1')->get();
+
+      // $mainpagesub = Pageleftmodule::where('group_id','=',$idgroup->group_id)->get();
+      // leftjoin('page_groups','pageleftmodules.group_id','=','page_groups.group_id')
+      // ->where('pageleftmodules.group_id','=',$idgroup->group_id)->get();
+
+
+      $page1 = Pageleft_one::get();
+      $page2 = Pageleft_two::get();
+      $pic = Page_slidepicture::where('status','=','true')->get();
+      // $imgpresent = DB::table('info_publicity_image')->where('ACTIVE','=','True')->get(); 
+      $imgpresent = DB::table('page_slidepictures')->get(); 
+      return view('font_obt.obt_main',[
+        'mainpages'=>$mainpage,
+        'pics'=>$pic, 'imgpresents'=>$imgpresent,
+        'page1'=>$page1, 'page2'=>$page2, 'pagegroups'=>$pagegroup,
+       
+        ]);
+    }
+    public function module_show(Request $request,$id)
+    {
+      $mainpage = Pageleftmodule::where('status','=','true')->where('group_id','=','1')->get();
+      $pagegroup = Page_group::where('status','=','true')->where('group_id','<>','1')->get();
+      $mainpageshow = Pageleftmodule::where('module_id','=',$id)->first();
       $page1 = Pageleft_one::get();
       $page2 = Pageleft_two::get();
 
-      return view('font_obt.obt_main',[
-        'page1'=>$page1,
-        'page2'=>$page2,
+      return view('font_obt.module_show',[
+        'mainpages'=>$mainpage,
+        'mainpageshows'=>$mainpageshow,
+        'page1'=>$page1, 'page2'=>$page2,'pagegroups'=>$pagegroup,
+       
         ]);
     }
-
    
     public function mcontact(Request $request)
     {

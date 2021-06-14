@@ -21,6 +21,9 @@ use App\Models\Pageleft_four;
 use App\Models\Pageleft_five;
 use App\Models\Pageleftmodule;
 use App\Models\Pageleftmodule_sub;
+use App\Models\Page_group;
+// use App\Models\Page_picture;
+use App\Models\Page_slidepicture;
 
 use Image;
 use PDF;
@@ -36,31 +39,122 @@ class BackobtController extends Controller
         $data = User::where('id','=',session('LogedUser'))->first();
         }
 
-        $pageModule_count = Pageleftmodule::count();
         $page1 = Pageleft_one::count();
         $page2 = Pageleft_two::count();
         $page3 = Pageleft_tree::count();
         $page4 = Pageleft_four::count();
         $page5 = Pageleft_five::count();
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
 
       return view('dashboard_obt',[
            'data'=>$data,
-           'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
-          'page5'=>$page5,'pageModule_count'=>$pageModule_count,
+           'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 
+           'page4'=>$page4,'page5'=>$page5,
+          'pageModulecount'=>$pageModulecount,'pagegroupcount'=>$pagegroupcount,
         ]);
     }
 
 //==========================================================//
-
-    function pageleft_module(Request $request)
+    function pagepicture_slide(Request $request)
     {
-    if (session()->has('LogedUser')) {
+        if (session()->has('LogedUser')) {
         $data = User::where('id','=',session('LogedUser'))->first();
         }
         $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
         ->get();
 
-        $pageModule_count = Pageleftmodule::count();
+        // $pageModule_count = Pageleftmodule::count();
+        $page1 = Pageleft_one::count();
+        $page2 = Pageleft_two::count();
+        $page3 = Pageleft_tree::count();
+        $page4 = Pageleft_four::count();
+        $page5 = Pageleft_five::count();
+    
+        $posit = Position::get();
+        $page = Pageleft_two::get();
+        $pageModule = Pageleftmodule::get();
+        $pagegroup = Page_group::get();
+        $pagePic = Page_slidepicture::get();
+
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
+
+        return view('back_obt.pagepicture_slide',[
+            'data'=>$data,'user'=>$user,'posits'=>$posit,'pages'=>$page,'pagegroups'=>$pagegroup,        
+            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
+            'page5'=>$page5, 'pagegroupcount'=>$pagegroupcount, 'pageModules'=>$pageModule,
+            'pageModulecount'=>$pageModulecount,'pagePics'=>$pagePic,
+        ]);
+    }
+    function pagepicture_slide_add(Request $request)
+    {
+        if (session()->has('LogedUser')) {
+        $data = User::where('id','=',session('LogedUser'))->first();
+        }
+        $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
+        ->get();
+
+        // $pageModule_count = Pageleftmodule::count();
+        $page1 = Pageleft_one::count();
+        $page2 = Pageleft_two::count();
+        $page3 = Pageleft_tree::count();
+        $page4 = Pageleft_four::count();
+        $page5 = Pageleft_five::count();
+    
+        $posit = Position::get();
+        $page = Pageleft_two::get();
+        $pageModule = Pageleftmodule::get();
+        $pagegroup = Page_group::get();
+        $pagePic = Page_slidepicture::get();
+
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
+
+        return view('back_obt.pagepicture_slide_add',[
+            'data'=>$data,'user'=>$user,'posits'=>$posit,'pages'=>$page,'pagegroups'=>$pagegroup,        
+            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
+            'page5'=>$page5, 'pagegroupcount'=>$pagegroupcount, 'pageModules'=>$pageModule,
+            'pageModulecount'=>$pageModulecount,
+            'pagePics'=>$pagePic,
+        ]);
+    }
+    // function pagepicture_slide_save(Request $request)
+    // {                      
+    //         $image = $request->file('img');
+    //         $imagename = $image->getClientOriginalName();
+    //         $image->move(public_path('uploads'), $imagename);
+
+    //         $add = new Page_picture();
+    //         $add->picture_name = $request->picture_name;
+    //         $add->picture = $imagename;
+    //         $add->save(); 
+    //         return response()->json(['success' =>$imagename]);
+       
+    // }
+    // function pagepicture_slide_delete(Request $request,$id)
+    // {
+    //     Page_picture::destroy($id);
+    //     return redirect()->route('obt.pagepicture_slide');
+    // }
+    function switchactive_picture(Request $request)
+    {
+        $id = $request->picture;
+        $active = Page_slidepicture::find($id);
+        $active->status = $request->onoff;
+        $active->save();
+    }
+
+    //==========================================================//
+    function page_group(Request $request)
+    {
+        if (session()->has('LogedUser')) {
+        $data = User::where('id','=',session('LogedUser'))->first();
+        }
+        $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
+        ->get();
+
+        // $pageModule_count = Pageleftmodule::count();
         $page1 = Pageleft_one::count();
         $page2 = Pageleft_two::count();
         $page3 = Pageleft_tree::count();
@@ -70,11 +164,74 @@ class BackobtController extends Controller
         $posit = Position::get();
         $page = Pageleft_two::get();
         $pageModule = Pageleftmodule::get();
+        $pagegroup = Page_group::get();
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
+
+        return view('back_obt.page_group',[
+            'data'=>$data,'user'=>$user,'posits'=>$posit,'pages'=>$page,'pagegroups'=>$pagegroup,        
+            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
+            'page5'=>$page5, 'pagegroupcount'=>$pagegroupcount, 'pageModules'=>$pageModule,
+            'pageModulecount'=>$pageModulecount,
+        ]);
+    }
+    function page_group_save(Request $request)
+    {        
+        $add = new Page_group();
+        $add->group_name = $request->group_name;
+        // $add->module_detail = $request->summary_ckeditor;
+        $add->save(); 
+        return redirect()->route('obt.page_group');
+    }
+    function page_group_update(Request $request)
+    {
+        $id = $request->group_id;
+        $update = Page_group::find($id);
+        $update->group_name = $request->group_name;
+        // $update->module_detail = $request->summary_ckeditor;
+        $update->save();
+
+        return redirect()->route('obt.page_group');
+    }
+    function page_group_delete(Request $request,$id)
+    {
+        Page_group::destroy($id);
+        return redirect()->route('obt.page_group');
+    }
+    function switchactive_group(Request $request)
+    {
+        $id = $request->group;
+        $active = Page_group::find($id);
+        $active->status = $request->onoff;
+        $active->save();
+    }
+//==========================================================//
+
+    function pageleft_module(Request $request)
+    {
+        if (session()->has('LogedUser')) {
+        $data = User::where('id','=',session('LogedUser'))->first();
+        }
+        $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
+        ->get();
+
+        
+        $page1 = Pageleft_one::count();
+        $page2 = Pageleft_two::count();
+        $page3 = Pageleft_tree::count();
+        $page4 = Pageleft_four::count();
+        $page5 = Pageleft_five::count();
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
+        $posit = Position::get();
+        $page = Pageleft_two::get();
+        $pageModule = Pageleftmodule::orderBy('module_id','desc')->get();
+      
 
         return view('back_obt.pageleft_module',[
             'data'=>$data,'user'=>$user,'posits'=>$posit,'pages'=>$page,             
             'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
-            'page5'=>$page5, 'pageModule_count'=>$pageModule_count, 'pageModules'=>$pageModule,
+            'page5'=>$page5, 'pagegroupcount'=>$pagegroupcount, 'pageModules'=>$pageModule,'pageModulecount'=>$pageModulecount,
         ]);
     }
     function pageleft_module_add(Request $request)
@@ -85,21 +242,24 @@ class BackobtController extends Controller
         $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
         ->get();
 
-        $pageModule_count = Pageleftmodule::count();
         $page1 = Pageleft_one::count();
         $page2 = Pageleft_two::count();
         $page3 = Pageleft_tree::count();
         $page4 = Pageleft_four::count();
         $page5 = Pageleft_five::count();
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
       
         $posit = Position::get();
         $page = Pageleft_two::get();
         $pageModule = Pageleftmodule::get();
+        $pagegroup = Page_group::where('status','=','true')->get();
 
         return view('back_obt.pageleft_module_add',[
-            'data'=>$data,'user'=>$user,'posits'=>$posit,'pages'=>$page,             
+            'data'=>$data,'user'=>$user,'posits'=>$posit,'pages'=>$page,'pagegroups'=>$pagegroup,            
             'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
-            'page5'=>$page5, 'pageModule_count'=>$pageModule_count, 'pageModules'=>$pageModule,
+            'page5'=>$page5, 'pagegroupcount'=>$pagegroupcount, 'pageModules'=>$pageModule,
+            'pageModulecount'=>$pageModulecount,
         ]);
     }
     function pageleft_module_save(Request $request)
@@ -107,6 +267,11 @@ class BackobtController extends Controller
         $add = new Pageleftmodule();
         $add->module_name = $request->module_name;
         $add->module_detail = $request->summary_ckeditor;
+
+        $idgroup = $request->group_id;
+        $idg = Page_group::where('group_id', $idgroup)->first();
+        $add->group_id = $idg->group_id;
+        $add->group_name = $idg->group_name;
         $add->save(); 
         return redirect()->route('obt.pageleft_module');
     }
@@ -118,19 +283,22 @@ class BackobtController extends Controller
         $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
         ->get();
 
-        $pageModule_count = Pageleftmodule::count();
         $page1 = Pageleft_one::count();
         $page2 = Pageleft_two::count();
         $page3 = Pageleft_tree::count();
         $page4 = Pageleft_four::count();
         $page5 = Pageleft_five::count();
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
               
         $pageModule = Pageleftmodule::where('module_id','=',$id)->first();
+        $pagegroup = Page_group::where('status','=','true')->get();
 
         return view('back_obt.pageleft_module_edit',[
             'data'=>$data,'user'=>$user,            
-            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
-            'page5'=>$page5, 'pageModule_count'=>$pageModule_count, 'pageModules'=>$pageModule,
+            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,'pagegroups'=>$pagegroup, 
+            'page5'=>$page5, 'pageModules'=>$pageModule,
+            'pageModulecount'=>$pageModulecount,'pagegroupcount'=>$pagegroupcount, 
         ]);
     }
 
@@ -140,6 +308,12 @@ class BackobtController extends Controller
         $update = Pageleftmodule::find($id);
         $update->module_name = $request->module_name;
         $update->module_detail = $request->summary_ckeditor;
+
+        $idgroup = $request->group_id;
+        $idg = Page_group::where('group_id', $idgroup)->first();
+        $update->group_id = $idg->group_id;
+        $update->group_name = $idg->group_name;
+
         $update->save();
 
         return redirect()->route('obt.pageleft_module');
@@ -149,7 +323,15 @@ class BackobtController extends Controller
       Pageleftmodule::destroy($id);
         return redirect()->route('obt.pageleft_module');
     }
-   
+    function switchactive_module(Request $request)
+    {
+        $id = $request->module;
+        $active = Pageleftmodule::find($id);
+        $active->status = $request->onoff;
+        $active->save();
+    }
+//==========================================================//
+
     function pageleft_module_sub(Request $request,$idmodule)
     {
         if (session()->has('LogedUser')) {

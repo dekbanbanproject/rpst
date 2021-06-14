@@ -20,6 +20,8 @@ class CreatePageleftmodulesTable extends Migration
             $table->string('module_name',255)->nullable(); 
             $table->mediumText('module_detail')->nullable();   
             $table->enum('status', ['true', 'false'])->default('false'); 
+            $table->string('group_id',11)->nullable(); 
+            $table->string('group_name',255)->nullable();
             $table->timestamps();
         });
     }

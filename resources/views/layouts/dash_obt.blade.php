@@ -12,8 +12,8 @@
     <title> dis-obt</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="apple-touch-icon" href="{{ asset('images/icons/logod.ico') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/icons/logod.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('imageso/icons/logod.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('imageso/icons/logod.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/fonts/material-icons/material-icons.css') }}">
 
@@ -53,11 +53,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/fonts/simple-line-icons/style.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/colors/palette-switch.css') }}">
     <!-- END: Page CSS-->
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet">
     <!-- BEGIN: Custom CSS-->
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style-rtl.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style-rtl.css') }}">
     
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> --}}
     <!-- END: Custom CSS-->
 </head>
 <!-- END: Head-->
@@ -125,23 +125,32 @@
        <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true">
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active"><a href="{{url('dashboard_obt')}}"><i class="la la-home text-danger"></i><span class="menu-title" data-i18n="Dashboard Hospital">Dashboard Store</span></a>
+                <li class="active"><a href="{{url('dashboard_obt')}}"><i class="la la-home text-danger"></i><span class="menu-title" data-i18n="Dashboard Hospital">Dashboard obt</span></a>
+                </li>
+                <li class=" nav-item"><a href="#"><i class="la la-photo  text-primary mr-1"></i><span class="menu-title" data-i18n="Appointment">รูปภาพ</span></a>
+                    <ul class="menu-content">  
+                        <li><a class="menu-item" href="{{url('back_obt/pagepicture_slide')}}"><i class="la la-photo text-primary mr-1"></i><span>รูปภาพ ( สไลด์หัว ) </span><span class="badge badge-danger right ml-3">&nbsp;000&nbsp;</span></a></li>
+                         </ul>
+                </li>
+                <li class=" nav-item"><a href="#"><i class="la la-paste  text-info mr-1"></i><span class="menu-title" data-i18n="Appointment">หมวดหมู่</span></a>
+                    <ul class="menu-content">  
+                        <li><a class="menu-item" href="{{url('back_obt/page_group')}}"><i class="la la-paste text-info mr-1"></i><span>หมวดหมู่ ( ซ้าย ) </span><span class="badge badge-danger right ml-3">&nbsp;{{$pagegroupcount}}&nbsp;</span></a></li>
+                        {{-- <li><a class="menu-item" href="{{url('back_obt/pageleft_module')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก </span><span class="badge badge-danger right ml-3">&nbsp;{{$pageModulecount}}&nbsp;</span></a></li> --}}
+                       
+                    </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="ft-layout text-danger mr-1"></i><span class="menu-title" data-i18n="Appointment">หน้าหลัก</span></a>
                     <ul class="menu-content">  
-                        <li><a class="menu-item" href="{{url('back_obt/pageleft_module')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก </span><span class="badge badge-danger right ml-3">&nbsp;{{$pageModule_count}}&nbsp;</span></a></li>
-                        {{-- <li><a class="menu-item" href="{{url('back_obt/pageleft_ones')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก 1</span><span class="badge badge-danger right ml-3">&nbsp;{{$page1}}&nbsp;</span></a></li> --}}
-                        {{-- <li><a class="menu-item" href="{{url('back_obt/pageleft_twos')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก 2</span><span class="badge badge-danger right ml-3">&nbsp;{{$page2}}&nbsp;</span></a></li>  --}}
-                        {{-- <li><a class="menu-item" href="{{url('back_obt/pageleft_trees')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก 3</span><span class="badge badge-danger right ml-3">&nbsp;{{$page3}}&nbsp;</span></a></li>   --}}
-                        {{-- <li><a class="menu-item" href="{{url('back_obt/pageleft_fours')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก 4</span><span class="badge badge-danger right ml-3">&nbsp;{{$page4}}&nbsp;</span></a></li>   --}}
-                        {{-- <li><a class="menu-item" href="{{url('back_obt/pageleft_fives')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก 5</span><span class="badge badge-danger right ml-3">&nbsp;{{$page5}}&nbsp;</span></a></li>  --}}
+                        {{-- <li><a class="menu-item" href="{{url('back_obt/page_group')}}"><i class="ft-layout text-danger mr-1"></i><span>หมวดหมู่ </span><span class="badge badge-danger right ml-3">&nbsp;{{$pagegroupcount}}&nbsp;</span></a></li> --}}
+                        <li><a class="menu-item" href="{{url('back_obt/pageleft_module')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก ( ซ้าย )</span><span class="badge badge-danger right ml-3">&nbsp;{{$pageModulecount}}&nbsp;</span></a></li>
+                       
                     </ul>
                 </li>
-                <li class=" nav-item"><a href="{{url('')}}"><i class="la la-paste text-warning mr-1"></i><span class="menu-title" data-i18n="Appointment">สั่งซื้อ</span><span class="badge badge-warning right">&nbsp;2&nbsp;</span></a></li>
-                <li class=" nav-item"><a href="{{url('')}}"><i class="la la-opencart text-info mr-1"></i><span class="menu-title" data-i18n="Appointment">รับสินค้า</span><span class="badge badge-info right">&nbsp;3&nbsp;</span></a></li>
-                <li class=" nav-item"><a href="{{url('')}}"><i class="la la-cart-plus text-success mr-1"></i><span class="menu-title" data-i18n="Appointment">เบิกสินค้า</span><span class="badge badge-success right">&nbsp;4&nbsp;</span></a></li>  
-                <li class=" nav-item"><a href="{{url('')}}"><i class="la la-signal text-primary mr-1"></i><span class="menu-title" data-i18n="Appointment">รายงานการรับเข้า</span><span class="badge badge-primary right">&nbsp;5&nbsp;</span></a></li> 
-                <li class=" nav-item"><a href="{{url('')}}"><i class="la la-la la-bar-chart text-warning mr-1"></i><span class="menu-title" data-i18n="Appointment">รายงานการเบิก</span><span class="badge badge-warning right">&nbsp;6&nbsp;</span></a></li>         
+                {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-paste text-warning mr-1"></i><span class="menu-title" data-i18n="Appointment">สั่งซื้อ</span><span class="badge badge-warning right">&nbsp;2&nbsp;</span></a></li> --}}
+                {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-opencart text-info mr-1"></i><span class="menu-title" data-i18n="Appointment">รับสินค้า</span><span class="badge badge-info right">&nbsp;3&nbsp;</span></a></li> --}}
+                {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-cart-plus text-success mr-1"></i><span class="menu-title" data-i18n="Appointment">เบิกสินค้า</span><span class="badge badge-success right">&nbsp;4&nbsp;</span></a></li>   --}}
+                {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-signal text-primary mr-1"></i><span class="menu-title" data-i18n="Appointment">รายงานการรับเข้า</span><span class="badge badge-primary right">&nbsp;5&nbsp;</span></a></li>  --}}
+                {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-la la-bar-chart text-warning mr-1"></i><span class="menu-title" data-i18n="Appointment">รายงานการเบิก</span><span class="badge badge-warning right">&nbsp;6&nbsp;</span></a></li>          --}}
             </ul>
         </div>
     </div>

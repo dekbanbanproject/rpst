@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/animate/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/hospital.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style-rtl.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> --}}
     
 </head>
 <!-- END: Head-->
