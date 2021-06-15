@@ -12,8 +12,8 @@
     <title> dis-store</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="apple-touch-icon" href="{{ asset('images/icons/logod.ico') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/icons/logod.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('imageso/icons/logod.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('imageso/icons/logod.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->

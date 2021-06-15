@@ -41,7 +41,7 @@ class FontobtController extends Controller
       $page2 = Pageleft_two::get();
       $pic = Page_slidepicture::where('status','=','true')->get();
       // $imgpresent = DB::table('info_publicity_image')->where('ACTIVE','=','True')->get(); 
-      $imgpresent = DB::table('page_slidepictures')->get(); 
+      $imgpresent = DB::table('page_slidepictures')->where('status','=','true')->get();
       return view('font_obt.obt_main',[
         'mainpages'=>$mainpage,
         'pics'=>$pic, 'imgpresents'=>$imgpresent,
