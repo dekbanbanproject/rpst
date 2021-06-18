@@ -65,9 +65,13 @@ class QrLoginController extends Controller
 	}
 
 	function login(){
+		// if (session()->has('LogedUser')) {
+		// 	return redirect('auth.login');
+		// }
 		return view('auth.login');
 	}
 	function register(){
+
 	 return view('auth.register');
 	 }
 	
@@ -115,8 +119,6 @@ class QrLoginController extends Controller
 			 if ($user) {
 				 if (Hash::check($request->password, $user->password)) {
 					 $request->session()->put('LogedUser',$user->id);
- 
-				   
 					 return redirect('dashbord_home');
 				 }else {
 					 return back()->with('fail','No account');

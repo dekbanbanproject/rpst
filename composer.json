@@ -28,7 +28,8 @@
         "slim/slim": "^4.5",
         "mpdf/mpdf": "^8.0",
         "unisharp/laravel-filemanager": "^2.1",
-        "uxweb/sweet-alert": "^2.0"
+        "uxweb/sweet-alert": "^2.0",
+        "cohensive/embed": "5.5.*"
         
     },
     "require-dev": {

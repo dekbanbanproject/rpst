@@ -46,8 +46,9 @@
                         </fieldset>
                     </div>
                     <div class="card-footer" align="right">
-                        <a href="{{url('back_obt/pageleft_module')}}" class="btn grey btn-outline-danger" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</a>
-                        <button type="submit" class="btn btn-outline-info"><i class="ft-save mr-1"></i>Save changes</button>                
+                       
+                        <a href="{{url('back_obt/pageleft_module')}}" class="btn btn-outline-danger btn-min-width btn-glow mr-1 mb-1" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</a>
+                        <button type="submit" class="btn btn-outline-info btn-min-width btn-glow mr-1 mb-1"><i class="ft-save mr-1"></i>Save changes</button>              
                     </div>
                 </form> 
                 </div>

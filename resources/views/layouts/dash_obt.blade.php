@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/fonts/material-icons/material-icons.css') }}">
 
     <!-- BEGIN: Vendor CSS-->
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/selects/select2.min.css') }}"> --}}
     <!-- END: Vendor CSS-->
  <!-- BEGIN: Vendor CSS-->
@@ -128,6 +128,15 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 <li class="active"><a href="{{url('dashboard_obt')}}"><i class="la la-home text-danger"></i><span class="menu-title" data-i18n="Dashboard Hospital">Dashboard obt</span></a>
                 </li>
+                <li class=" nav-item"><a href="#"><i class="la la-user  text-primary mr-1"></i><span class="menu-title" data-i18n="Appointment">บุคลากร</span></a>
+                    <ul class="menu-content">  
+                        <li><a class="menu-item" href="{{url('back_obt/depart')}}"><i class="la la-object-group text-primary mr-1"></i><span>แผนก </span><span class="badge badge-danger right ml-3">&nbsp;000&nbsp;</span></a></li>
+                        <li><a class="menu-item" href="{{url('back_obt/position')}}"><i class="la la-slideshare text-primary mr-1"></i><span>ตำแหน่ง </span><span class="badge badge-danger right ml-3">&nbsp;000&nbsp;</span></a></li>
+                        {{-- <li><a class="menu-item" href="{{url('back_obt/person')}}"><i class="la la-photo text-primary mr-1"></i><span>บุคลากร </span><span class="badge badge-danger right ml-3">&nbsp;000&nbsp;</span></a></li> --}}
+                        {{-- <li><a class="menu-item" href="{{url('setting/infoperson')}}"><i class="la la-user text-danger mr-1"></i><span>บุคลากร</span><span class="badge badge-danger right ml-3">&nbsp;{{$usercount}}&nbsp;</span></a></li> --}}
+                        <li><a class="menu-item" href="{{url('setting/infoperson')}}"><i class="la la-user text-danger mr-1"></i><span>บุคลากร</span><span class="badge badge-danger right ml-3">&nbsp;000&nbsp;</span></a></li>
+                    </ul>
+                </li>
                 <li class=" nav-item"><a href="#"><i class="la la-photo  text-primary mr-1"></i><span class="menu-title" data-i18n="Appointment">รูปภาพ</span></a>
                     <ul class="menu-content">  
                         <li><a class="menu-item" href="{{url('back_obt/pagepicture_slide')}}"><i class="la la-photo text-primary mr-1"></i><span>รูปภาพ ( สไลด์หัว ) </span><span class="badge badge-danger right ml-3">&nbsp;000&nbsp;</span></a></li>
@@ -135,8 +144,8 @@
                 </li>
                 <li class=" nav-item"><a href="#"><i class="la la-paste  text-info mr-1"></i><span class="menu-title" data-i18n="Appointment">หมวดหมู่</span></a>
                     <ul class="menu-content">  
-                        <li><a class="menu-item" href="{{url('back_obt/page_group')}}"><i class="la la-paste text-info mr-1"></i><span>หมวดหมู่ ( ซ้าย ) </span><span class="badge badge-danger right ml-3">&nbsp;{{$pagegroupcount}}&nbsp;</span></a></li>
-                        {{-- <li><a class="menu-item" href="{{url('back_obt/pageleft_module')}}"><i class="ft-layout text-danger mr-1"></i><span>หน้าหลัก </span><span class="badge badge-danger right ml-3">&nbsp;{{$pageModulecount}}&nbsp;</span></a></li> --}}
+                        <li><a class="menu-item" href="{{url('back_obt/page_group')}}"><i class="la la-paste text-info mr-1"></i><span>หมวดหมู่</span><span class="badge badge-danger right ml-2">&nbsp;{{$pagegroupcount}}&nbsp;</span></a></li>
+                        {{-- <li><a class="menu-item" href="{{url('back_obt/page_groupright')}}"><i class="la la-paste text-danger mr-1"></i><span>หมวดหมู่ (ขวา) </span><span class="badge badge-danger right ml-2">&nbsp;{{$pageModulecount}}&nbsp;</span></a></li> --}}
                        
                     </ul>
                 </li>
@@ -147,7 +156,7 @@
                        
                     </ul>
                 </li>
-                {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-paste text-warning mr-1"></i><span class="menu-title" data-i18n="Appointment">สั่งซื้อ</span><span class="badge badge-warning right">&nbsp;2&nbsp;</span></a></li> --}}
+                <li class=" nav-item"><a href="{{url('back_obt/quality')}}"><i class="la la-book text-success mr-1"></i><span class="menu-title" data-i18n="Appointment">เนื้อหา</span><span class="badge badge-warning right">&nbsp;2&nbsp;</span></a></li>
                 {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-opencart text-info mr-1"></i><span class="menu-title" data-i18n="Appointment">รับสินค้า</span><span class="badge badge-info right">&nbsp;3&nbsp;</span></a></li> --}}
                 {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-cart-plus text-success mr-1"></i><span class="menu-title" data-i18n="Appointment">เบิกสินค้า</span><span class="badge badge-success right">&nbsp;4&nbsp;</span></a></li>   --}}
                 {{-- <li class=" nav-item"><a href="{{url('')}}"><i class="la la-signal text-primary mr-1"></i><span class="menu-title" data-i18n="Appointment">รายงานการรับเข้า</span><span class="badge badge-primary right">&nbsp;5&nbsp;</span></a></li>  --}}

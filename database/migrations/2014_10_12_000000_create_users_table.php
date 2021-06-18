@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('QRpassword')->nullable();
             $table->binary('img')->nullable();
-            $table->string('status')->nullable();
+            $table->enum('status', ['true', 'false'])->default('false'); 
             $table->string('store_id')->nullable();
             $table->string('facebook')->nullable();
             $table->string('linetoken')->nullable();

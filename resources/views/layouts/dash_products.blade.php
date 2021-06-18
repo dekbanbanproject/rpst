@@ -97,8 +97,8 @@
                 </li>
                 <li class=" nav-item"><a href="#"><i class="la la-gear text-danger mr-1"></i><span class="menu-title" data-i18n="Appointment">Settings</span></a>
                     <ul class="menu-content">  
-                        <li><a class="menu-item" href="{{url('setting/infoposition')}}"><i class="la la-user text-danger mr-1"></i><span>ตำแหน่ง</span><span class="badge badge-danger right ml-3">&nbsp;{{$pocount}}&nbsp;</span></a></li>
-                        <li><a class="menu-item" href="{{url('setting/infoperson')}}"><i class="la la-user text-danger mr-1"></i><span>บุคลากร</span><span class="badge badge-danger right ml-3">&nbsp;{{$usercount}}&nbsp;</span></a></li>                      
+                        {{-- <li><a class="menu-item" href="{{url('setting/infoposition')}}"><i class="la la-user text-danger mr-1"></i><span>ตำแหน่ง</span><span class="badge badge-danger right ml-3">&nbsp;{{$pocount}}&nbsp;</span></a></li> --}}
+                        {{-- <li><a class="menu-item" href="{{url('setting/infoperson')}}"><i class="la la-user text-danger mr-1"></i><span>บุคลากร</span><span class="badge badge-danger right ml-3">&nbsp;{{$usercount}}&nbsp;</span></a></li>                       --}}
                         <li><a class="menu-item" href="{{url('setting/storemains')}}"><i class="la la-hospital-o text-danger mr-1"></i><span>คลังหลัก</span><span class="badge badge-danger right ml-3">&nbsp;{{$stmcount}}&nbsp;</span></a></li>  
                         <li><a class="menu-item" href="{{url('setting/storesub')}}"><i class="la la-institution text-danger mr-1"></i><span>คลังย่อย</span><span class="badge badge-danger right ml-3">&nbsp;{{$stscount}}&nbsp;</span></a></li>  
                         <li><a class="menu-item" href="{{url('setting/unit')}}"><i class="la la-flask text-danger mr-1"></i><span>หน่วยนับ</span><span class="badge badge-danger right ml-3">&nbsp;{{$unitcount}}&nbsp;</span></a></li> 

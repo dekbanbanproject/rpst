@@ -1,4 +1,5 @@
 @extends('layouts.dash_products')
+{{-- @extends('layouts.dash_obt') --}}
 
 @section('content')
 <?php

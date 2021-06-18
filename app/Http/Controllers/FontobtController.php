@@ -30,7 +30,7 @@ class FontobtController extends Controller
     {
       // $idgroup = Page_group::where('status','=','true')->first();
       $mainpage = Pageleftmodule::where('status','=','true')->where('group_id','=','1')->get();
-      $pagegroup = Page_group::where('status','=','true')->where('group_id','<>','1')->get();
+      $pagegroup = Page_group::where('status','=','true')->where('group_id','<>','1')->where('layout_id','=','1')->get();
 
       // $mainpagesub = Pageleftmodule::where('group_id','=',$idgroup->group_id)->get();
       // leftjoin('page_groups','pageleftmodules.group_id','=','page_groups.group_id')
@@ -40,10 +40,10 @@ class FontobtController extends Controller
       $page1 = Pageleft_one::get();
       $page2 = Pageleft_two::get();
       $pic = Page_slidepicture::where('status','=','true')->get();
-      // $imgpresent = DB::table('info_publicity_image')->where('ACTIVE','=','True')->get(); 
+      $vedio = Pageleftmodule::where('status','=','true')->where('group_id','=','12')->first(); 
       $imgpresent = DB::table('page_slidepictures')->where('status','=','true')->get();
       return view('font_obt.obt_main',[
-        'mainpages'=>$mainpage,
+        'mainpages'=>$mainpage,'vedios'=>$vedio,
         'pics'=>$pic, 'imgpresents'=>$imgpresent,
         'page1'=>$page1, 'page2'=>$page2, 'pagegroups'=>$pagegroup,
        

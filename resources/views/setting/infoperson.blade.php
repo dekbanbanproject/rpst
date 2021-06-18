@@ -1,4 +1,5 @@
-@extends('layouts.dash_products')
+{{-- @extends('layouts.dash_products') --}}
+@extends('layouts.dash_obt') 
 
 @section('content')
 <?php
@@ -44,7 +45,7 @@ function DateThai($strDate)
                                         <li>
                                             {{-- <a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right" href="hospital-book-appointment.html" target="_blank">View all</a> --}}
                                             <button type="button" class="btn btn-m btn-primary box-shadow-2 btn-min-width pull-right" data-toggle="modal" data-target="#rotateIn">เพิ่มบุคลากร <i class="ft-plus-circle ml-1"></i>&nbsp;&nbsp;
-                                            <button type="button" class="btn btn-m btn-success box-shadow-2 btn-min-width pull-right mr-2" data-toggle="modal" data-target="#rotateInposition">เพิ่มตำแหน่ง <i class="ft-plus-circle ml-1"></i>
+                                            {{-- <button type="button" class="btn btn-m btn-success box-shadow-2 btn-min-width pull-right mr-2" data-toggle="modal" data-target="#rotateInposition">เพิ่มตำแหน่ง <i class="ft-plus-circle ml-1"></i> --}}
                                         </li>
                                     </ul>
                                 </div>
@@ -112,10 +113,20 @@ function DateThai($strDate)
                                                     </td>
                                                     <td class="text-truncate">{{$u->POSIT_NAME}}</td>
                                                     <td class="text-truncate">{{Datethai($u->updated_at)}}</td>
+                                                    {{-- <td class="text-padding">
+                                                        <div class="float-left"> 
+                                                            @if($u->status == 'true' )
+                                                                <input type="checkbox" class="switchery" data-size="sm" id="{{ $u->id }}" name="{{ $u->id }}" data-color="info" onchange="switchprofile({{ $u->id }});" checked>
+                                                            @else
+                                                                <input type="checkbox" class="switchery" data-size="sm" id="{{ $u->id }}" name="{{ $u->id }}" data-color="info" onchange="switchprofile({{ $u->id }});" >
+                                                            @endif
+                                                        </div>
+                                                    </td>   --}}
                                                     <td>
                                                         {{-- <a href="" data-toggle="modal" data-target="#rotateInDownLeft{{$u->id}}"><i class="la la-key font-large-1" style="color:rgb(233, 7, 7)"></i></a>&nbsp;&nbsp; --}}
                                                         <a href="" data-toggle="modal" data-target="#rotateInDownRight{{$u->id}}"> <i class="la la-gear font-large-1" style="color:rgb(23, 175, 245)"></i></a>&nbsp;&nbsp;
                                                         <a href="" data-toggle="modal" data-target="#rotateInedit{{$u->id}}"><i class="la la-edit font-large-1" style="color:rgb(255, 72, 0)"></i></a>&nbsp;&nbsp;
+                                                        <a href="{{url('setting/profile_delete/'.$u->id)}}"> <i class="la la-trash font-large-1" style="color:rgb(243, 12, 4)"></i></a>
                                                         {{-- <button type="button" href="" class="btn btn-sm btn-info btn-glow round px-2" data-toggle="modal" data-target="#rotateInDownRight{{$u->id}}"><i class="ft-settings"></i></button> --}}
                                                     </td>                                                  
                                                 </tr>
@@ -229,7 +240,7 @@ function DateThai($strDate)
 
                                                 <!-- Modal -->
                                                 <div class="modal animated rotateInDownRight text-left" id="rotateInedit{{$u->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel64" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-dialog modal-xl" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-warning ">
                                                                 <h4 class="modal-title text-white" id="myModalLabel64">แก้ไขข้อมูล</h4>
@@ -242,12 +253,12 @@ function DateThai($strDate)
                                                         <input type="hidden" id="id_update" name="id_update" value="{{$u->id}}">
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <div class="form-group col-6 mb-2">
+                                                                    <div class="form-group col-3 mb-2">
                                                                         <div class="form-group">
                                                                             @if ($u->img == '')
-                                                                            <img src="{{ asset('img/logo/logod.png') }}" id="" alt="Image" class="img-thumbnail" style="height:180px; width:220px;">
+                                                                            <img src="{{ asset('img/logo/logod.png') }}" id="" alt="Image" class="img-thumbnail" style="height:250px; width:250px;">
                                                                         @else
-                                                                            <img src="data:image/png;base64,{{ chunk_split(base64_encode($u->img))}}" id="edit_preview" alt="Image" class="img-thumbnail" style="height:180px; width:220px;">
+                                                                            <img src="data:image/png;base64,{{ chunk_split(base64_encode($u->img))}}" id="edit_preview" alt="Image" class="img-thumbnail" style="height:250px; width:250px;">
                                                                         @endif
                                                                         </div>
                                                                         <div class="form-group">
@@ -256,91 +267,138 @@ function DateThai($strDate)
                                                                             <div class="invalid-feedback">กรุณาเลือกภาพ</div>
                                                                         </div>                                           
                                                                     </div>
-                                                                    <div class="form-group col-6 mb-2">
-                                                                       <div class="row">
-                                                                            <div class="col-md-6">
+                                                                    <div class="form-group col-9 mb-2">                                                
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
                                                                                 <label>ชื่อ: </label>
                                                                                 <div class="form-group position-relative has-icon-left">
                                                                                     <input type="text" placeholder="ชื่อ" class="form-control" id="name" name="name" value="{{$u->name}}" required>
                                                                                     <div class="form-control-position">
-                                                                                        <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
+                                                                                        <i class="la la-user font-large-0 line-height-1 text-muted icon-align"></i>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-4">
                                                                                 <label>นามสกุล: </label>
                                                                                 <div class="form-group position-relative has-icon-left">
-                                                                                    <input type="text" placeholder="นามสกุล" class="form-control" id="lname" name="lname" value="{{$u->lname}}" required>
-                                                                                    <div class="form-control-position">
-                                                                                        <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                                                                    </div>
+                                                                                    <input type="text" placeholder="นามสกุล" class="form-control" id="lname" name="lname" value="{{$u->lname}}" required>                                                       
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="col-md-4">
+                                                                            <label>Tel: </label>
+                                                                            <div class="form-group position-relative has-icon-left">
+                                                                                <input type="text" placeholder="" class="form-control" id="cid" name="cid" value="{{$u->cid}}">
+                                                                                <div class="form-control-position">
+                                                                                    <i class="la la-phone-square font-large-0 line-height-1 text-muted icon-align"></i>
+                                                                                </div>
+                                                                            </div>   
                                                                        </div>
-                                                                        
-                                                                        
-
-                                                                        <div class="row">
-                                                                            <div class="col-md-6">
-                                                                                <label>Username: </label>
-                                                                                <div class="form-group position-relative has-icon-left">
-                                                                                    <input type="text" placeholder="Username" class="form-control" id="Username" name="username" value="{{$u->username}}" required>
-                                                                                    <div class="form-control-position">
-                                                                                        <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                                                                    </div>
+                                                                    </div>
+                            
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Username: </label>
+                                                                            <div class="form-group position-relative has-icon-left">
+                                                                                <input type="text" placeholder="Username" class="form-control" id="Username" name="username" value="{{$u->username}}" required>
+                                                                                <div class="form-control-position">
+                                                                                    <i class="la la-user font-large-0 line-height-1 text-muted icon-align"></i>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-6">
-                                                                                <label>Password: </label>
-                                                                                <div class="form-group position-relative has-icon-left">
-                                                                                    <input type="password" placeholder="Password" class="form-control" id="Password" name="password" value="{{$u->password}}" required>
-                                                                                    <div class="form-control-position">
-                                                                                        <i class="la la-key font-large-1 line-height-1 text-muted icon-align"></i>
-                                                                                    </div>
-                                                                                </div> 
-                                                                            </div>
-                                                                       
                                                                         </div>
-                                                                        <label>CID: </label>
-                                                                        <div class="form-group position-relative has-icon-left">
-                                                                            <input type="text" placeholder="CID" class="form-control" id="cid" name="cid" value="{{$u->cid}}" >
-                                                                            <div class="form-control-position">
-                                                                                <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                                                            </div>
-                                                                        </div>  
-
-
-
-
-
-                                                                    </div>
-                                                                </div>
-                                                                    <div class="row">
-                                                                        <div class="form-group col-6 mb-2">
+                                                                        <div class="col-md-4">
+                                                                            <label>Password: </label>
+                                                                            <div class="form-group position-relative has-icon-left">
+                                                                                <input type="password" placeholder="Password" class="form-control" id="Password" name="password" value="{{$u->password}}" required>
+                                                                                <div class="form-control-position">
+                                                                                    <i class="la la-key font-large-0 line-height-1 text-muted icon-align"></i>
+                                                                                </div>
+                                                                            </div>   
+                                                                        </div>
+                                                                        <div class="col-md-4">
                                                                             <label>Line Token: </label>
                                                                             <div class="form-group position-relative has-icon-left">
-                                                                                <input type="text" placeholder="line token" class="form-control" id="linetoken" name="linetoken" >
+                                                                                <input type="text" placeholder="" class="form-control" id="linetoken" name="linetoken" value="{{$u->linetoken}}">
                                                                                 <div class="form-control-position">
-                                                                                    <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
+                                                                                    <i class="la la-comment font-large-0 line-height-1 text-muted icon-align"></i>
                                                                                 </div>
                                                                             </div>                                
                                                                         </div>
-                                                                        <div class="form-group col-6 mb-2">                                           
-                                                                            <label>ตำแหน่ง: </label>
-                                                                            <div class="form-group position-relative has-icon-left">
-                                                                                <input type="text" placeholder="ตำแหน่ง" class="form-control" id="position" name="position" >
-                                                                                <div class="form-control-position">
-                                                                                    <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                                                                </div>
-                                                                            </div>                                         
+                                                                    </div>  
+                                                                  
+                                                              <div class="row">                                       
+                                                                <div class="form-group col-4 mb-2">                                           
+                                                                    <label>ตำแหน่ง: </label>
+                                                                    <div class="form-group position-relative has-icon-left">
+                                                                        <select class="form-control" id="position" name="position" required>
+                                                                            <option value="">--กรุณาเลือก--</option>
+                                                                            @foreach ($posits as $p)
+                                                                            @if ($u->position == $p->POSIT_ID)
+                                                                            <option value="{{$p->POSIT_ID}}" selected>{{$p->POSIT_NAME}}</option>
+                                                                            @else
+                                                                            <option value="{{$p->POSIT_ID}}">{{$p->POSIT_NAME}}</option>
+                                                                            @endif
+                                                                              
+                                                                            @endforeach
+                                                                    </select>
+                                                                        <div class="form-control-position">
+                                                                            <i class="la la-shield font-large-0 line-height-1 text-muted icon-align"></i>
                                                                         </div>
-                                                                                                    
-                                                                    </div>
-                                                             
-                                                              
+                                                                    </div>                                         
+                                                                </div>                         
+                                                                                            
+                                                                <div class="form-group col-sm-2 mb-2">
+                                                                    <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/admin.png') }}" alt="Avatar" width="40" height="40"><br><br>
+                                                                    {{-- <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                     
+                                                                            <input type="checkbox" class="form-check-input" id="admin" name="admin" >                                                       
+                                                                    </div> --}}
+                                                                    @if ($u->admin == '')
+                                                                    <input type="checkbox" class="form-check-input" id="admin" name="admin" >
+                                                                @else
+                                                                    <input type="checkbox" class="form-check-input" id="admin" name="admin" checked>                                                                               
+                                                                @endif  
+                                                                </div>                              
+                                                                <div class="form-group col-sm-2 mb-2">
+                                                                    <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/read.png') }}" alt="Avatar"  width="40" height="40"><br><br>
+                                                                    {{-- <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                      
+                                                                        <input type="checkbox" class="form-check-input" id="read" name="read" >                                                      
+                                                                    </div>  --}}
+                                                                    @if ($u->read == '')
+                                                                    <input type="checkbox" class="form-check-input" id="read" name="read" >
+                                                                    @else
+                                                                    <input type="checkbox" class="form-check-input" id="read" name="read" checked>
+                                                                    @endif 
+                                                                </div>
+                                                                <div class="form-group col-sm-2 mb-2">
+                                                                    <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/write.png') }}" alt="Avatar"  width="40" height="40"><br><br>
+                                                                    {{-- <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        <input type="checkbox" class="form-check-input" id="write" name="write" >
+                                                                        </div>  --}}
+                                                                        @if ($u->write == '')
+                                                                        <input type="checkbox" class="form-check-input" id="write" name="write" >
+                                                                        @else
+                                                                        <input type="checkbox" class="form-check-input" id="write" name="write" checked>
+                                                                        @endif  
+                                                                </div>
+                                                                <div class="form-group col-sm-2 mb-2">
+                                                                    <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/print.png') }}" alt="Avatar"  width="40" height="40"><br><br>
+                                                                    {{-- <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        <input type="checkbox" class="form-check-input" id="print" name="print" >
+                                                                    </div>  --}}
+                                                                    @if ($u->print == '')
+                                                                    <input type="checkbox" class="form-check-input" id="print" name="print" >
+                                                                    @else
+                                                                    <input type="checkbox" class="form-check-input" id="print" name="print" checked>
+                                                                    @endif
+                                                                </div>
+                                                            </div>        
+                                                        </div>
+                                                    </div>
+                                                    <hr>
                                                             <div class="modal-footer">
-                                                                <button type="reset" class="btn grey btn-outline-danger" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</button>
-                                                                <button type="submit" class="btn btn-outline-info"><i class="ft-save mr-1"></i>Save changes</button>
+                                                                {{-- <button type="reset" class="btn grey btn-outline-danger" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</button>
+                                                                <button type="submit" class="btn btn-outline-info"><i class="ft-save mr-1"></i>Save changes</button> --}}
+                                                                <button type="reset" class="btn btn-outline-danger btn-min-width btn-glow mr-1 mb-1" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</button>
+                                                                <button type="submit" class="btn btn-outline-info btn-min-width btn-glow mr-1 mb-1"><i class="ft-save mr-1"></i>Save changes</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -368,7 +426,7 @@ function DateThai($strDate)
 
                     <!-- Modal เพิ่มข้อมูลบุคลากร-->
                     <div class="modal animated rotateInDownLeft text-left" id="rotateIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel64" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-success ">
                                     <h4 class="modal-title text-white" id="myModalLabel64">เพิ่มข้อมูล</h4>
@@ -381,9 +439,9 @@ function DateThai($strDate)
                             <input type="hidden" id="id_update" name="id_update" value="{{$u->id}}">
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="form-group col-6 mb-2">
+                                        <div class="form-group col-3 mb-2">
                                             <div class="form-group">
-                                                <img src="{{ asset('app-assets/images/portrait/small/default.jpg')}}" id="add_preview" alt="Image" class="img-thumbnail" style="height:180px; width:220px;">
+                                                <img src="{{ asset('app-assets/images/portrait/small/default.jpg')}}" id="add_preview" alt="Image" class="img-thumbnail" style="height:250px; width:250px;">
                                             </div>
                                             <div class="form-group">
                                                 <input style="font-family: 'Kanit', sans-serif;" type="file" name="img" id="img" class="form-control input-sm" onchange="addURL(this)" >
@@ -392,170 +450,161 @@ function DateThai($strDate)
                                             </div>                                           
                                         </div>
                                        
-                                        <div class="form-group col-6 mb-2">                                                
+                                        <div class="form-group col-9 mb-2">                                                
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <label>ชื่อ: </label>
                                                     <div class="form-group position-relative has-icon-left">
                                                         <input type="text" placeholder="ชื่อ" class="form-control" id="name" name="name" required>
                                                         <div class="form-control-position">
-                                                            <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
+                                                            <i class="la la-user font-large-0 line-height-1 text-muted icon-align"></i>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <label>นามสกุล: </label>
                                                     <div class="form-group position-relative has-icon-left">
-                                                        <input type="text" placeholder="นามสกุล" class="form-control" id="lname" name="lname" required>
-                                                        <div class="form-control-position">
-                                                            <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                                        </div>
+                                                        <input type="text" placeholder="นามสกุล" class="form-control" id="lname" name="lname" required>                                                       
                                                     </div>
                                                 </div>
+                                                <div class="col-md-4">
+                                                <label>Tel: </label>
+                                                <div class="form-group position-relative has-icon-left">
+                                                    <input type="text" placeholder="" class="form-control" id="cid" name="cid" >
+                                                    <div class="form-control-position">
+                                                        <i class="la la-phone-square font-large-0 line-height-1 text-muted icon-align"></i>
+                                                    </div>
+                                                </div>   
                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Username: </label>
-                                                    <div class="form-group position-relative has-icon-left">
-                                                        <input type="text" placeholder="Username" class="form-control" id="Username" name="username" required>
-                                                        <div class="form-control-position">
-                                                            <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                                        </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Username: </label>
+                                                <div class="form-group position-relative has-icon-left">
+                                                    <input type="text" placeholder="Username" class="form-control" id="Username" name="username" required>
+                                                    <div class="form-control-position">
+                                                        <i class="la la-user font-large-0 line-height-1 text-muted icon-align"></i>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Password: </label>
-                                                    <div class="form-group position-relative has-icon-left">
-                                                        <input type="password" placeholder="Password" class="form-control" id="Password" name="password" required>
-                                                        <div class="form-control-position">
-                                                            <i class="la la-key font-large-1 line-height-1 text-muted icon-align"></i>
-                                                        </div>
-                                                    </div>   
                                                 </div>
                                             </div>
-
-                                            <label>CID: </label>
-                                            <div class="form-group position-relative has-icon-left">
-                                                <input type="text" placeholder="CID" class="form-control" id="cid" name="cid" >
-                                                <div class="form-control-position">
-                                                    <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                                </div>
-                                            </div>   
-                                                                                  
-                                        </div>                           
-                                    </div>
-
-                                  
-                                    <div class="row">
-                                        <div class="form-group col-6 mb-2">
-                                            <label>Line Token: </label>
-                                            <div class="form-group position-relative has-icon-left">
-                                                <input type="text" placeholder="line token" class="form-control" id="linetoken" name="linetoken" >
-                                                <div class="form-control-position">
-                                                    <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                                </div>
-                                            </div>                                
-                                        </div>
-                                        <div class="form-group col-6 mb-2">                                           
+                                            <div class="col-md-4">
+                                                <label>Password: </label>
+                                                <div class="form-group position-relative has-icon-left">
+                                                    <input type="password" placeholder="Password" class="form-control" id="Password" name="password" required>
+                                                    <div class="form-control-position">
+                                                        <i class="la la-key font-large-0 line-height-1 text-muted icon-align"></i>
+                                                    </div>
+                                                </div>   
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Line Token: </label>
+                                                <div class="form-group position-relative has-icon-left">
+                                                    <input type="text" placeholder="" class="form-control" id="linetoken" name="linetoken" >
+                                                    <div class="form-control-position">
+                                                        <i class="la la-comment font-large-0 line-height-1 text-muted icon-align"></i>
+                                                    </div>
+                                                </div>                                
+                                            </div>
+                                        </div>                                                                                  
+                                
+                                    <div class="row">                                       
+                                        <div class="form-group col-4 mb-2">                                           
                                             <label>ตำแหน่ง: </label>
                                             <div class="form-group position-relative has-icon-left">
-                                                <input type="text" placeholder="ตำแหน่ง" class="form-control" id="position" name="position" >
+                                                <select class="form-control" id="position" name="position" required>
+                                                    <option value="">--กรุณาเลือก--</option>
+                                                    @foreach ($posits as $p)
+                                                        <option value="{{$p->POSIT_ID}}">{{$p->POSIT_NAME}}</option>
+                                                    @endforeach
+                                                </select>
                                                 <div class="form-control-position">
-                                                    <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
+                                                    <i class="la la-shield font-large-0 line-height-1 text-muted icon-align"></i>
                                                 </div>
                                             </div>                                         
                                         </div>                         
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-sm-3 mb-2">
-                                                    <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/admin.png') }}" alt="Avatar" width="60" height="60"><br><br>
-                                                    <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                     
-                                                            <input type="checkbox" class="form-check-input" id="admin" name="admin" >                                                       
-                                                    </div>
-                                                </div>                              
-                                                <div class="form-group col-sm-3 mb-2">
-                                                    <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/read.png') }}" alt="Avatar"  width="60" height="60"><br><br>
-                                                    <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                      
-                                                        <input type="checkbox" class="form-check-input" id="read" name="read" >                                                      
-                                                    </div>                                                                        
-                                                </div>
-                                                <div class="form-group col-sm-3 mb-2">
-                                                    <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/write.png') }}" alt="Avatar"  width="60" height="60"><br><br>
-                                                    <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <input type="checkbox" class="form-check-input" id="write" name="write" >
-                                                     </div> 
-                                                </div>
-                                                <div class="form-group col-sm-3 mb-2">
-                                                    <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/print.png') }}" alt="Avatar"  width="60" height="60"><br><br>
-                                                    <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <input type="checkbox" class="form-check-input" id="print" name="print" >
-                                                    </div> 
-                                                </div>
-                                            </div>        
+                                                                    
+                                        <div class="form-group col-sm-2 mb-2">
+                                            <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/admin.png') }}" alt="Avatar" width="40" height="40"><br><br>
+                                            <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                     
+                                                    <input type="checkbox" class="form-check-input" id="admin" name="admin" >                                                       
+                                            </div>
+                                        </div>                              
+                                        <div class="form-group col-sm-2 mb-2">
+                                            <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/read.png') }}" alt="Avatar"  width="40" height="40"><br><br>
+                                            <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                      
+                                                <input type="checkbox" class="form-check-input" id="read" name="read" >                                                      
+                                            </div>                                                                        
+                                        </div>
+                                        <div class="form-group col-sm-2 mb-2">
+                                            <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/write.png') }}" alt="Avatar"  width="40" height="40"><br><br>
+                                            <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="checkbox" class="form-check-input" id="write" name="write" >
+                                                </div> 
+                                        </div>
+                                        <div class="form-group col-sm-2 mb-2">
+                                            <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/print.png') }}" alt="Avatar"  width="40" height="40"><br><br>
+                                            <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="checkbox" class="form-check-input" id="print" name="print" >
+                                            </div> 
+                                        </div>
+                                    </div>        
                                 </div>
+                            </div>
+                            <hr>
                                 <div class="modal-footer">
-                                    <button type="reset" class="btn grey btn-outline-danger" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</button>
-                                    <button type="submit" class="btn btn-outline-info"><i class="ft-save mr-1"></i>Save changes</button>
+                                    {{-- <button type="reset" class="btn grey btn-outline-danger" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</button>
+                                    <button type="submit" class="btn btn-outline-info"><i class="ft-save mr-1"></i>Save changes</button> --}}
+                                    <button type="reset" class="btn btn-outline-danger btn-min-width btn-glow mr-1 mb-1" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</button>
+                                    <button type="submit" class="btn btn-outline-info btn-min-width btn-glow mr-1 mb-1"><i class="ft-save mr-1"></i>Save changes</button>
                                 </div>
                             </div>
                         </form>
                         </div>
                     </div>
-
- <!-- Modal เพิ่มข้อมูลตำแหน่ง-->
- <div class="modal animated rotateInDownLeft text-left" id="rotateInposition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel64" aria-hidden="true">
-    <div class="modal-dialog " role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary ">
-                <h4 class="modal-title text-white" id="myModalLabel64">เพิ่มข้อมูลตำแหน่ง</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                </div>
             </div>
-    <form action="{{ route('per.position_save') }}" method="POST" enctype="multipart/form-data">
-        @csrf 
-        <input type="hidden" id="id_update" name="id_update" value="{{$u->id}}">
-            <div class="modal-body">
-                <div class="row">                   
-                    <div class="form-group col-12 mb-2">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>ตำแหน่ง: </label>
-                                <div class="form-group position-relative has-icon-left">
-                                    <input type="text" placeholder="ตำแหน่ง" class="form-control" id="POSIT_NAME" name="POSIT_NAME" required>
-                                    <div class="form-control-position">
-                                        <i class="la la-user font-large-1 line-height-1 text-muted icon-align"></i>
-                                    </div>
-                                </div>
-                            </div>                           
-                       </div>                       
-                    </div>                                       
-                </div>              
-            </div>
-                
-            <div class="modal-footer">
-                <button type="reset" class="btn grey btn-outline-danger" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</button>
-                <button type="submit" class="btn btn-outline-info"><i class="ft-save mr-1"></i>Save changes</button>
-            </div>
-        </div>
-    </form>
-    </div>
-</div>
 
     @endsection
     @section('footer')
     <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    {{-- <script src="{{ asset('app-assets/vendors/js/material-vendors.min.js') }}"></script> --}}
     <script src="{{ asset('app-assets/vendors/js/charts/chart.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+
     <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+
     <script src="{{ asset('app-assets/js/scripts/pages/appointment.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/modal/components-modal.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/tables/datatables-extensions/datatables-sources.js') }}"></script>
+    
 
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/switchery.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/pages/material-app.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/forms/switch.js') }}"></script>
+    <script>
+        function switchprofile(profile){
+            var checkBox=document.getElementById(profile);
+            var onoff;
+    
+            if (checkBox.checked == true){
+               onoff = "true";
+                } else {
+                    onoff = "false";
+                }
+            var _token=$('input[name="_token"]').val();
+                $.ajax({
+                        url:"{{route('per.switchactive_profile')}}",
+                        method:"GET",
+                        data:{onoff:onoff,profile:profile,_token:_token}
+                })
+             }
+       </script>
     <script>
         function addURL(input) {
             var fileInput = document.getElementById('img');
@@ -596,6 +645,7 @@ function DateThai($strDate)
             }
         }
 </script>
+
 
 @endsection
 

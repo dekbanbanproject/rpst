@@ -22,7 +22,7 @@ use App\Models\Pageleft_five;
 use App\Models\Pageleftmodule;
 use App\Models\Pageleftmodule_sub;
 use App\Models\Page_group;
-// use App\Models\Page_picture;
+use App\Models\Layout;
 use App\Models\Page_slidepicture;
 
 use Image;
@@ -162,15 +162,16 @@ class BackobtController extends Controller
         $page5 = Pageleft_five::count();
       
         $posit = Position::get();
+        $lay = Layout::get();
         $page = Pageleft_two::get();
         $pageModule = Pageleftmodule::get();
-        $pagegroup = Page_group::get();
+        $pagegroup = Page_group::orderBy('group_id', 'desc')->get();
         $pageModulecount = Pageleftmodule::count();
         $pagegroupcount = Page_group::count();
 
         return view('back_obt.page_group',[
             'data'=>$data,'user'=>$user,'posits'=>$posit,'pages'=>$page,'pagegroups'=>$pagegroup,        
-            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
+            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,'lays'=>$lay,
             'page5'=>$page5, 'pagegroupcount'=>$pagegroupcount, 'pageModules'=>$pageModule,
             'pageModulecount'=>$pageModulecount,
         ]);
@@ -179,7 +180,7 @@ class BackobtController extends Controller
     {        
         $add = new Page_group();
         $add->group_name = $request->group_name;
-        // $add->module_detail = $request->summary_ckeditor;
+        $add->layout_id = $request->layout_id;
         $add->save(); 
         return redirect()->route('obt.page_group');
     }
@@ -188,7 +189,7 @@ class BackobtController extends Controller
         $id = $request->group_id;
         $update = Page_group::find($id);
         $update->group_name = $request->group_name;
-        // $update->module_detail = $request->summary_ckeditor;
+        $update->layout_id = $request->layout_id;
         $update->save();
 
         return redirect()->route('obt.page_group');

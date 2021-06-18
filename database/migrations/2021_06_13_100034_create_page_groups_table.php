@@ -20,6 +20,8 @@ class CreatePageGroupsTable extends Migration
             $table->string('group_name',255)->nullable(); 
             $table->mediumText('group_detail')->nullable();   
             $table->enum('status', ['true', 'false'])->default('false'); 
+            $table->string('group_type',20)->nullable(); 
+            $table->string('layout_id',11)->nullable(); 
             $table->timestamps();
         });
     }

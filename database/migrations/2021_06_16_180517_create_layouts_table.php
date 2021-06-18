@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePositionsTable extends Migration
+class CreateLayoutsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,17 @@ class CreatePositionsTable extends Migration
      * @return void
      */
     public function up()
-    {
-        if (!Schema::hasTable('positions'))
+    {      
+        if (!Schema::hasTable('layouts'))
         {
-        Schema::create('positions', function (Blueprint $table) {
-            $table->increments('POSIT_ID',11);
-            $table->string('POSIT_NAME',255)->nullable();
-            $table->enum('status', ['true', 'false'])->default('false');  
+        Schema::create('layouts', function (Blueprint $table) {
+            $table->increments('layout_id',11);
+            $table->string('layout_name',255)->nullable(); 
+            $table->enum('status', ['true', 'false'])->default('false'); 
             $table->timestamps();
         });
     }
-}
+    }
 
     /**
      * Reverse the migrations.
@@ -31,6 +31,6 @@ class CreatePositionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('positions');
+        Schema::dropIfExists('layouts');
     }
 }

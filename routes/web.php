@@ -12,6 +12,9 @@ use App\Http\Controllers\FontobtController;
 use App\Http\Controllers\BackobtController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\PictureController;
+use App\Http\Controllers\BackobtrightController;
+use App\Http\Controllers\BackobtqualityController;
+use App\Http\Controllers\BackobtpersonController;
 use Illuminate\Support\Facades\DB;
 
 
@@ -60,7 +63,49 @@ Route::get('dashbord_medical/{idstore}/{iduser}', 'DashbordController@dashbord_m
 Route::get('dashbord_home', 'DashbordController@dashbord_home')->name('dash.dashbord_home');//****dashbord_medical */
 
 //******************************** อบต */
+//******************************************start BackobtrightController ************************************************** */
 
+Route::get('back_obt/page_groupright',[BackobtrightController::class,'page_groupright'])->name('obt.page_groupright'); // ******** page_group ขวา***********//
+Route::post('back_obt/page_groupright_save',[BackobtrightController::class,'page_groupright_save'])->name('obt.page_groupright_save');
+Route::post('back_obt/page_groupright_update',[BackobtrightController::class,'page_groupright_update'])->name('obt.page_groupright_update');
+Route::get('back_obt/page_groupright_delete/{id}',[BackobtrightController::class,'page_groupright_delete'])->name('obt.page_groupright_delete');
+Route::get('switchactive_groupright',[BackobtrightController::class,'switchactive_groupright'])->name('obt.switchactive_groupright');
+
+//******************************************end BackobtrightController ************************************************** */
+
+//******************************************start BackobtpersonController ************************************************** */
+
+Route::get('back_obt/person',[BackobtpersonController::class,'person'])->name('obt.person'); // ******** person ***********//
+Route::post('back_obt/person_save',[BackobtpersonController::class,'person_save'])->name('obt.person_save');
+Route::post('back_obt/person_update',[BackobtpersonController::class,'person_update'])->name('obt.person_update');
+Route::get('back_obt/person_delete/{id}',[BackobtpersonController::class,'person_delete'])->name('obt.person_delete');
+Route::get('switchactive_person',[BackobtpersonController::class,'switchactive_person'])->name('obt.switchactive_person');
+
+Route::get('back_obt/position',[BackobtpersonController::class,'position'])->name('obt.position'); // ******** position ***********//
+Route::post('back_obt/position_save',[BackobtpersonController::class,'position_save'])->name('obt.position_save');
+Route::post('back_obt/position_update',[BackobtpersonController::class,'position_update'])->name('obt.position_update');
+Route::get('back_obt/position_delete/{id}',[BackobtpersonController::class,'position_delete'])->name('obt.position_delete');
+Route::get('switchactive_position',[BackobtpersonController::class,'switchactive_position'])->name('obt.switchactive_position');
+
+Route::get('back_obt/depart',[BackobtpersonController::class,'depart'])->name('obt.depart'); // ******** depart ***********//
+Route::post('back_obt/depart_save',[BackobtpersonController::class,'depart_save'])->name('obt.depart_save');
+Route::post('back_obt/depart_update',[BackobtpersonController::class,'depart_update'])->name('obt.depart_update');
+Route::get('back_obt/depart_delete/{id}',[BackobtpersonController::class,'depart_delete'])->name('obt.depart_delete');
+Route::get('switchactive_depart',[BackobtpersonController::class,'switchactive_depart'])->name('obt.switchactive_depart');
+
+//******************************************end BackobtpersonController ************************************************** */
+
+//******************************************start BackobtqualityController ************************************************** */
+
+Route::get('back_obt/quality',[BackobtqualityController::class,'quality'])->name('obt.quality'); // ******** quality ***********//
+Route::get('back_obt/quality_add',[BackobtqualityController::class,'quality_add'])->name('obt.quality_add');
+Route::post('back_obt/quality_save',[BackobtqualityController::class,'quality_save'])->name('obt.quality_save');
+Route::get('back_obt/quality_edit/{id}',[BackobtqualityController::class,'quality_edit'])->name('obt.quality_edit');
+Route::post('back_obt/quality_update',[BackobtqualityController::class,'quality_update'])->name('obt.quality_update');
+Route::get('back_obt/quality_delete/{id}',[BackobtqualityController::class,'quality_delete'])->name('obt.quality_delete');
+Route::get('switchactive_quality',[BackobtqualityController::class,'switchactive_quality'])->name('obt.switchactive_quality');
+
+//******************************************end BackobtqualityController ************************************************** */
 Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // ******** dashboard_obt ***********//
 
 Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // ******** dashboard_obt ***********//
@@ -77,12 +122,11 @@ Route::get('back_obt/pagepicture_slide_delete/{id}',[BackobtController::class,'p
 Route::get('switchactive_picture',[BackobtController::class,'switchactive_picture'])->name('obt.switchactive_picture');
 
 
-Route::get('back_obt/page_group',[BackobtController::class,'page_group'])->name('obt.page_group'); // ******** page_group ***********//
+Route::get('back_obt/page_group',[BackobtController::class,'page_group'])->name('obt.page_group'); // ******** page_group ซ้าย***********//
 Route::post('back_obt/page_group_save',[BackobtController::class,'page_group_save'])->name('obt.page_group_save');
 Route::post('back_obt/page_group_update',[BackobtController::class,'page_group_update'])->name('obt.page_group_update');
 Route::get('back_obt/page_group_delete/{id}',[BackobtController::class,'page_group_delete'])->name('obt.page_group_delete');
 Route::get('switchactive_group',[BackobtController::class,'switchactive_group'])->name('obt.switchactive_group');
-
 
 Route::get('back_obt/pageleft_module',[BackobtController::class,'pageleft_module'])->name('obt.pageleft_module'); // ******** pageleft_ones ***********//
 Route::get('back_obt/pageleft_module_add',[BackobtController::class,'pageleft_module_add'])->name('obt.pageleft_module_add'); 
@@ -91,8 +135,6 @@ Route::get('back_obt/pageleft_module_edit/{id}',[BackobtController::class,'pagel
 Route::post('back_obt/pageleft_module_update',[BackobtController::class,'pageleft_module_update'])->name('obt.pageleft_module_update');
 Route::get('back_obt/pageleft_module_delete/{id}',[BackobtController::class,'pageleft_module_delete'])->name('obt.pageleft_module_delete');
 Route::get('switchactive_module',[BackobtController::class,'switchactive_module'])->name('obt.switchactive_module');
-
-
 
 Route::get('back_obt/pageleft_module_sub/{idmodule}',[BackobtController::class,'pageleft_module_sub'])->name('obt.pageleft_module_sub'); // ******** pageleft_module_sub ***********//
 Route::post('back_obt/pageleft_module_sub_save',[BackobtController::class,'pageleft_module_sub_save'])->name('obt.pageleft_module_sub_save');
@@ -141,6 +183,8 @@ Route::post('back_obt/pageleft_fives_update',[BackobtController::class,'pageleft
 Route::get('back_obt/pageleft_fives_delete/{id}',[BackobtController::class,'pageleft_fives_delete'])->name('obt.pageleft_fives_delete');
 
 
+
+
 //*********************************** */
 
 Route::get('dashboard_store',[StoreController::class,'dashboard_store']); // ******** store ***********//
@@ -158,6 +202,8 @@ Route::post('setting/profile_save',[StoreSettingController::class,'profile_save'
 Route::post('setting/profile_update',[StoreSettingController::class,'profile_update'])->name('per.profile_update');
 Route::post('setting/profile_permiss_update',[StoreSettingController::class,'profile_permiss_update'])->name('per.profile_permiss_update');
 Route::post('setting/position_save',[StoreSettingController::class,'position_save'])->name('per.position_save');
+Route::get('switchactive_profile',[StoreSettingController::class,'switchactive_profile'])->name('per.switchactive_profile');
+Route::get('setting/profile_delete/{id}',[StoreSettingController::class,'profile_delete'])->name('per.profile_delete');
 
 Route::get('setting/infoposition',[StoreSettingController::class,'infoposition'])->name('per.infoposition');
 Route::post('setting/positionsave',[StoreSettingController::class,'positionsave'])->name('per.positionsave');

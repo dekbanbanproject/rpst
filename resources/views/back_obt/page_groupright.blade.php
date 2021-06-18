@@ -37,7 +37,7 @@ function DateThai($strDate)
                     <div id="recent-appointments" class="col-12 col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">รายการหมวดหมู่</h4>
+                                <h4 class="card-title">รายการหมวดหมู่ (ขวา)</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -59,7 +59,7 @@ function DateThai($strDate)
                                                 <th class="border-top-0" width="5%;">เปิดใช้งาน</th>                                               
                                                 <th class="border-top-0" width="5%;">แก้ไข</th>
                                                 <th class="border-top-0" width="5%;">ลบ</th>
-                                                {{-- <th class="border-top-0" width="5%;">หน้าหลัก</th>  --}}
+                                                <th class="border-top-0" width="5%;">หน้าหลัก</th> 
                                             </tr>
                                         </thead>
                                         <tbody>                                            
@@ -84,7 +84,7 @@ function DateThai($strDate)
                                                     <td width="5%;">   
                                                         <a href="{{url('back_obt/page_group_delete/'.$u->group_id)}}"> <i class="la la-trash font-large-1" style="color:rgb(243, 12, 4)"></i></a>
                                                     </td>  
-                                                    {{-- <td class="text-padding" width="5%;"><a href="{{url('back_obt/pageleft_module_sub/'.$u->group_id)}}" ><i class="la la-copy font-large-1" style="color:rgb(204, 4, 230)"></i></a></td>                                                   --}}
+                                                    <td class="text-padding" width="5%;"><a href="{{url('back_obt/pageleft_module_sub/'.$u->group_id)}}" ><i class="la la-copy font-large-1" style="color:rgb(204, 4, 230)"></i></a></td>                                                  
                                                 </tr>
 
                                                     <!-- Modal แก้ไขข้อมูลหน้าหลัก-->
@@ -100,38 +100,23 @@ function DateThai($strDate)
                                                         <form action="{{ route('obt.page_group_update') }}" method="POST" enctype="multipart/form-data">
                                                             @csrf 
                                                             <input type="hidden" id="group_id" name="group_id" value="{{$u->group_id}}">
-                                                                <div class="modal-body">                                                                  
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <label>หมวดหมู่ : </label>
-                                                                            <div class="form-group position-relative has-icon-left">
-                                                                                <input type="text" placeholder="หมวดหมู่ " class="form-control" id="group_name" name="group_name" value="{{$u->group_name}}" required>
-                                                                                <div class="form-control-position">
-                                                                                    <i class="la la-tag font-large-0 line-height-1 text-muted icon-align mr-1"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>     
-                                                                    </div>                                                                       
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <fieldset class="form-group position-relative ">
-                                                                                <label for="" style="font-size:19px;color:rgb(63, 37, 179)">ตำแหน่งวาง</label>
-                                                                                <select class="form-control" id="layout_id" name="layout_id" required>
-                                                                                        <option value="">--กรุณาเลือก--</option>
-                                                                                        @foreach ($lays as $l)
-                                                                                        @if ($u->layout_id == $l->layout_id)
-                                                                                        <option value="{{$l->layout_id}}" selected>{{$l->layout_name}}</option>
-                                                                                        @else
-                                                                                        <option value="{{$l->layout_id}}">{{$l->layout_name}}</option>
-                                                                                        @endif
-                                                                                            
-                                                                                        @endforeach
-                                                                                </select>                                       
-                                                                            </fieldset>                                                                            
-                                                                        </div>                            
-                                                                    </div>                       
-                                                                </div>                                       
-                                                                   
+                                                                <div class="modal-body">
+                                                                    <div class="row">                   
+                                                                        <div class="form-group col-12 mb-2">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <label>หมวดหมู่ : </label>
+                                                                                    <div class="form-group position-relative has-icon-left">
+                                                                                        <input type="text" placeholder="หมวดหมู่ " class="form-control" id="group_name" name="group_name" value="{{$u->group_name}}" required>
+                                                                                        <div class="form-control-position">
+                                                                                            <i class="la la-tag font-large-0 line-height-1 text-muted icon-align mr-1"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>     
+                                                                        </div>                       
+                                                                        </div>                                       
+                                                                    </div>              
+                                                                </div>
                                                                 <hr>
                                                                 <div class="modal-footer">
                                                                     <button type="reset" class="btn grey btn-outline-danger" data-dismiss="modal"><i class="ft-power mr-1"></i>Close</button>
@@ -186,25 +171,7 @@ function DateThai($strDate)
                             </div>                            
                        </div>                       
                     </div>                                       
-                </div>     
-                <div class="row">                   
-                    <div class="form-group col-12 mb-2">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <fieldset class="form-group position-relative ">
-                                    <label for="" style="font-size:19px;color:rgb(63, 37, 179)">ตำแหน่งวาง</label>
-                                    <select class="form-control" id="layout_id" name="layout_id" required>
-                                            <option value="">--กรุณาเลือก--</option>
-                                            @foreach ($lays as $l)
-                                                <option value="{{$l->layout_id}}">{{$l->layout_name}}</option>
-                                            @endforeach
-                                    </select>                                       
-                                </fieldset>
-                               
-                            </div>                            
-                       </div>                       
-                    </div>                                       
-                </div>               
+                </div>              
             </div>
                 <hr>
             <div class="modal-footer">

@@ -7,8 +7,8 @@
             <div class="card pull-up">
                 <div class="card-header">                           
                 </div>
-                <div class="card-content">
-                    <div class="card-body py-0">
+                <div class="card-content ">
+                    <div class="card-body py-0 pull-up">
                         <div class="d-flex justify-content-between lh-condensed">
                             <div class="order-details text-center">
                                 <div class="product-img d-flex align-items-center">
@@ -45,7 +45,7 @@
     <div class="container" style="width: 100%;">   
             <div class="row">
                 <div class="col-lg-3  p-0">              
-                      <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-3 border-right-blue border-right-3 border-bottom-3 box-shadow-3">
+                      <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                           <div class="card-head bg-info shadow-lg">
                               <div class="media p-1">
                                   <div class="media-body text-center">
@@ -68,7 +68,7 @@
                       
 
                 @foreach ($pagegroups as $key => $group)   
-                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-3 border-right-blue border-right-3 border-bottom-3 box-shadow-3">
+                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                         <div class="card-head bg-danger shadow-lg">
                             <div class="media p-1">
                                 {{-- <div class="media-left pr-1"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="{{ asset('/img/users/head.png') }}" alt="avatar"><i></i></span></div> --}}
@@ -104,31 +104,23 @@
 
 
             <div class="col-lg-6  ">                
-                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3">
+                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                     <div class="card-header shadow-lg">
-                        ข่าวเด่น
+                        YouTube
                     </div>
                     <div class="card-body shadow lg">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.
+                        <h5 class="card-title">นำเสนอ</h5>
+                    
+                      {{-- <iframe width="480" height="315" src="{!! $vedios->module_detail !!}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
+                      <iframe width="480" height="315" src="https://www.youtube.com/embed/8_GntoLcbKc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-                        </p>
-                        {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
-                        <a href="#" class="btn btn-sm btn-outline-primary btn-min-width pull-right btn-glow mr-1 mb-1">รายละเอียด</a>
+                        {{-- <a href="#" class="btn btn-sm btn-outline-primary btn-min-width pull-right btn-glow mr-1 mb-1">รายละเอียด</a> --}}
                     </div>                       
                 </div>
 
-                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3">
+                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                     <div class="card-header shadow-lg">
-                        <h4 class="card-title">Justified Tab with pills</h4>
+                        <h4 class="card-title">ประกาศ</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body shadow-lg">
@@ -172,7 +164,7 @@
                     </div>
                 </div>
 
-                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3">
+                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                     <div class="card-header shadow-lg">
                         <h4 class="card-title">Justified Tab with pills</h4>
                     </div>
@@ -218,7 +210,7 @@
                     </div>
                 </div>
 
-                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3">
+                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                     <div class="card-header shadow-lg">
                         <h4 class="card-title">Tabs with Right Border</h4>
                     </div>
@@ -257,7 +249,7 @@
                     </div>
                 </div>            
 
-                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3">
+                <div class="card border-top-blue border-top-3 border-bottom-blue border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                     <div class="card-header shadow-lg">
                         Featured
                     </div>
@@ -279,7 +271,7 @@
             </div> 
 
             <div class="col-lg-3 p-0">                    
-                <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-3 border-right-blue border-right-3 border-bottom-3 box-shadow-3">
+                <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                       <div class="card-header shadow-lg">
                           <h4 class="card-title">Carousel</h4>
                       </div>
@@ -318,7 +310,7 @@
                       </div>              
                     </div>
 
-                    <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-3 border-right-blue border-right-3 border-bottom-3 box-shadow-3">
+                    <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                         <div class="card-head">
                             <div class="media">
                                 <a><img src="{{ asset('/img/obt/tel.jpg') }}" width="270px" height="100px"alt="..."></a>                              
@@ -337,7 +329,7 @@
                         </div>
                     </div>
 
-                    <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-3 border-right-blue border-right-3 border-bottom-3 box-shadow-3">
+                    <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                       <div class="card-header shadow-lg">
                           <h4 class="card-title">ทำเนียบบุคลากร</h4>
                           <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>

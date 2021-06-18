@@ -166,6 +166,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         // Unisharp\Ckeditor\ServiceProvider::class,
+        Cohensive\Embed\EmbedServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -252,6 +253,7 @@ return [
         // 'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Embed' => Cohensive\Embed\Facades\Embed::class,
     ],
 
 ];

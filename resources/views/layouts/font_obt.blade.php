@@ -40,7 +40,7 @@
 </head>
 <!-- END: Head-->
 
-<nav class="header-navbar navbar-expand-sm navbar navbar-with-menu navbar-light navbar-shadow border-grey border-lighten-2">
+<nav class="header-navbar navbar-expand-sm navbar navbar-with-menu navbar-light navbar-shadow border-grey border-lighten-2 pull-up">
     <div class="navbar-wrapper">
         <div class="navbar-header">
             <ul class="nav navbar-nav mr-auto">

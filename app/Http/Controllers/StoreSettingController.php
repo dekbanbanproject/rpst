@@ -13,6 +13,17 @@ use App\Models\Store_sub;
 use App\Models\Units;
 use App\Models\Category;
 use App\Models\Products;
+use App\Models\Pageleft_one;
+use App\Models\Pageleft_two;
+use App\Models\Pageleft_tree;
+use App\Models\Pageleft_four;
+use App\Models\Pageleft_five;
+use App\Models\Pageleftmodule;
+use App\Models\Pageleftmodule_sub;
+use App\Models\Page_group;
+use App\Models\Page_slidepicture;
+use App\Models\Quality;
+use App\Models\Depart;
 
 date_default_timezone_set("Asia/Bangkok");
 
@@ -38,6 +49,21 @@ class StoreSettingController extends Controller
         $countwr = User::count('write');
         $countpr = User::count('print');
 
+        $page1 = Pageleft_one::count();
+        $page2 = Pageleft_two::count();
+        $page3 = Pageleft_tree::count();
+        $page4 = Pageleft_four::count();
+        $page5 = Pageleft_five::count();
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
+      
+        $posit = Position::get();
+        $page = Pageleft_two::get();
+        $pageModule = Pageleftmodule::get();
+        $pagegroup = Page_group::get();
+        $pagegroupright = Page_group::where('group_type', '=','2')->get();
+        $dep = Depart::get();
+
         $total = $countad. '+' .$countre. '+' .$countwr.'+' .$countpr;
 
         return view('setting/infoperson', [
@@ -46,6 +72,10 @@ class StoreSettingController extends Controller
             'usercount'=>$usercount, 'pocount'=>$pocount, 'stmcount'=>$stmcount, 'stscount'=>$stscount,
             'unitcount'=>$unitcount, 'catcount'=>$catcount, 'prodcount'=>$prodcount,
             'total'=>$total,
+            'posits'=>$posit,'pages'=>$page,'pagegroups'=>$pagegroup,'pagegrouprights'=>$pagegroupright,         
+            'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
+            'page5'=>$page5, 'pagegroupcount'=>$pagegroupcount, 'pageModules'=>$pageModule,
+            'pageModulecount'=>$pageModulecount,'deps'=>$dep,
         ]);
     }
     public static function countad ($id)
@@ -112,6 +142,10 @@ class StoreSettingController extends Controller
             $update->password = Hash::make($request->password);
             $update->linetoken = $request->linetoken;
             $update->position = $request->position;
+            $update->admin = $request->admin;
+            $update->read = $request->read;
+            $update->write = $request->write;
+            $update->print = $request->print;
            
             if($request->hasFile('img')){
                 $file = $request->file('img');
@@ -125,6 +159,18 @@ class StoreSettingController extends Controller
                 'iduser'=>$iduser,
             ]);
 
+    }
+    function switchactive_profile(Request $request)
+    {
+        $id = $request->profile;
+        $active = User::find($id);
+        $active->status = $request->onoff;
+        $active->save();
+    }
+    function profile_delete(Request $request,$id)
+    {
+        User::destroy($id);
+        return redirect()->route('per.infoperson');
     }
     function changpassword(Request $request)
     {
