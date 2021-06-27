@@ -1,6 +1,13 @@
 @extends('layouts.font_obt')
 @section('content')
 
+<?php   
+    date_default_timezone_set("Asia/Bangkok");
+    $date = date('Y-m-d');
+    $time = now();
+    use App\Http\Controllers\ConfigController;  
+?>
+
 <div class="container mt-0" >
 <!--================= Food Slide section start =================-->
 <section class="section">
@@ -22,24 +29,16 @@
                 </div>
                 <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
                     <span class="float-left">
-                        <span class="text-muted">Ordered On</span>
-                        <strong>Wed, Oct 3rd 2018</strong>
+                        <strong><b><h5 style="font-size:18px;color:red">{{DateThai($date)}}</h5></b></strong>
                     </span>
                     <span class="float-right">
-                        <span class="text-muted">Ordered Amount</span>
-                        <strong>$700</strong>
+                        <strong><b><h5 id="displayTime" style="font-size:18px;color:red"></h5></b></strong>
                     </span>
                 </div>
          
-       
-{{-- </section> --}}
-<!--================= Food Slide section end =================-->
- <!--================ Food menu section start =================-->
- {{-- <section class="section  mt-0" > --}}
+
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-        {{-- <img src="/docs/4.6/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> --}}
-        {{-- Bootstrap --}}
+        <a class="navbar-brand" href="#">       
         </a>
     </nav>
     <div class="container" style="width: 100%;">   
@@ -126,7 +125,7 @@
                         <div class="card-body shadow-lg">
                             <ul class="nav nav-tabs nav-justified">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="activeLable1-tab1" data-toggle="tab" href="#activeLable1" aria-controls="activeLable1" aria-expanded="true"><span class="badge badge-pill badge-glow badge-danger float-right">2</span> ข่าวจัดซื้อจัดจ้าง</a>
+                                    <a class="nav-link active" id="activeLable1-tab1" data-toggle="tab" href="#activeLable1" aria-controls="activeLable1" aria-expanded="true"><span class="badge badge-pill badge-glow badge-danger float-right">2</span> ข่าวประชาสัมพันธ์</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="linkLable1-tab1" data-toggle="tab" href="#linkLable1" aria-controls="linkLable1" aria-expanded="false"><span class="badge badge-pill badge-glow badge-info float-right">1</span> รายงานการดำเนินงาน</a>
@@ -134,15 +133,19 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="linkOptLable1-tab1" data-toggle="tab" href="#linkOptLable1" aria-controls="linkOptLable1"><span class="badge badge-pill badge-glow badge-primary float-right">5</span> การจัดซื้อจัดจ้างหรือการจัดหาพัสดุ </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" id="linkOptLable2-tab1" data-toggle="tab" href="#linkOptLable2" aria-controls="linkOptLable2"><span class="badge badge-pill badge-glow badge-warning float-right">5</span> ประกาศราคากลาง </a>
-                                </li>
+                                </li> --}}
                             </ul>
                             <div class="tab-content px-1 pt-1">
                                 <div role="tabpanel" class="tab-pane active" id="activeLable1" aria-labelledby="activeLable1-tab1" aria-expanded="true">
-                                    <p>Macaroon candy canes tootsie roll wafer lemon drops liquorice jelly-o tootsie roll cake. Marzipan
-                                        liquorice soufflé cotton candy jelly cake jelly-o sugar plum marshmallow. Dessert cotton candy
-                                        macaroon chocolate sugar plum cake donut.</p>
+
+                                    @foreach ($qu_centers as $key => $qucenter)
+                                        <p>{!! $qucenter->quality_name !!} </p>
+                                    @endforeach
+                                    {{-- <p>{!! $qu_centers->quality_name !!} </p> --}}
+                                    <a href="#" class="btn btn-sm btn-outline-primary btn-min-width pull-right btn-glow mr-1 mb-1">รายละเอียด</a>
+                                    <br>
                                 </div>
                                 <div class="tab-pane" id="linkLable1" role="tabpanel" aria-labelledby="linkLable1-tab1" aria-expanded="false">
                                     <p>Chocolate bar gummies sesame snaps. Liquorice cake sesame snaps cotton candy cake sweet brownie.
@@ -154,10 +157,10 @@
                                         donut pie macaroon. Gingerbread powder chocolate cake icing. Cheesecake gummi bears ice cream
                                         marzipan.</p>
                                 </div>
-                                <div class="tab-pane" id="linkOptLable2" role="tabpanel" aria-labelledby="linkOptLable2-tab" aria-expanded="false">
+                                {{-- <div class="tab-pane" id="linkOptLable2" role="tabpanel" aria-labelledby="linkOptLable2-tab" aria-expanded="false">
                                     <p>Soufflé cake gingerbread apple pie sweet roll pudding. Sweet roll dragée topping cotton candy cake
                                         jelly beans. Pie lemon drops sweet pastry candy canes chocolate cake bear claw cotton candy wafer.</p>
-                                </div>
+                                </div> --}}
                                 
                             </div>
                         </div>
@@ -273,7 +276,7 @@
             <div class="col-lg-3 p-0">                    
                 <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
                       <div class="card-header shadow-lg">
-                          <h4 class="card-title">Carousel</h4>
+                          <h4 class="card-title text-center">ผู้บริหาร</h4>
                       </div>
                       <div class="card-content shadow-lg">                   
                           <div id="carousel-example" class="carousel slide" data-ride="carousel">
@@ -284,13 +287,19 @@
                               </ol>
                               <div class="carousel-inner" role="listbox">
                                   <div class="carousel-item active">
-                                      <img src="{{ asset('/img/users/head.png') }}" class="d-block w-100" alt="First slide" height="250px" width="20px" >
+                                      @foreach ($nayogs as $yog)
+                                      <img src="data:image/png;base64,{{ chunk_split(base64_encode($yog->img)) }}" class="d-block w-100" alt="First slide" style="width:100%;height: 290px;">   
+                                      @endforeach
                                   </div>
                                   <div class="carousel-item">
-                                      <img src="{{ asset('/img/users/head.png') }}" class="d-block w-100" alt="Second slide" height="250px" width="20px">
+                                    @foreach ($nayogs as $yog)
+                                    <img src="data:image/png;base64,{{ chunk_split(base64_encode($yog->img)) }}" class="d-block w-100" alt="First slide" style="width:100%;height: 290px;">   
+                                    @endforeach
                                   </div>
                                   <div class="carousel-item">
-                                      <img src="{{ asset('/img/users/head.png') }}" class="d-block w-100" alt="Third slide" height="250px" width="20px">
+                                    @foreach ($nayogs as $yog)
+                                    <img src="data:image/png;base64,{{ chunk_split(base64_encode($yog->img)) }}" class="d-block w-100" alt="First slide" style="width:100%;height: 290px;">   
+                                    @endforeach
                                   </div>
                               </div>
                               <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev" height="250px" width="20px">
@@ -303,9 +312,10 @@
                               </a>
                           </div>
                           <div class="card-body shadow-lg">
-                              <p class="card-text">Some quick</p>
-                              <a href="#" class="card-link">Card link</a>
-                              <a href="#" class="card-link">Another link</a>
+                            @foreach ($nayogs as $na)
+                              <p class="card-text text-center">{{$na->POSIT_NAME}}</p>                              
+                              <p class="card-text text-center">{{$na->name}} {{$na->lname}}</p>
+                              @endforeach
                           </div>
                       </div>              
                     </div>
@@ -318,11 +328,11 @@
                         </div>                       
                         <div class="card-content collapse show">
                             <div class="card-body shadow-lg">
-                                <a href="#" class="list-group-item list-group-item-action">
+                                <a href="{{url('obt_main_contacts')}}" class="list-group-item list-group-item-action">
                                 <div class="d-inline mr-25">
                                     <i class="ft-info"></i>
                                 </div>
-                                Spam
+                                ร้องเรียน
                                 <span class="badge badge-warning badge-pill badge-round float-right">3</span>
                                 </a>
                             </div>
@@ -330,20 +340,22 @@
                     </div>
 
                     <div class="card border-top-pink border-top-3 border-bottom-pink border-left-blue border-left-1 border-right-blue border-right-1 border-bottom-1 box-shadow-3 pull-up">
-                      <div class="card-header shadow-lg">
-                          <h4 class="card-title">ทำเนียบบุคลากร</h4>
+                      <div class="card-header bg-success shadow-lg">
+                          <h4 class="card-title text-center" style="color:white;font-size:20px">ทำเนียบบุคลากร</h4>
                           <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                           <div class="heading-elements">                              
                           </div>
                       </div>
                       <div class="card-content collapse show">
                           <div class="card-body shadow-lg">
-                            <a href="#" class="list-group-item list-group-item-action">
+                            @foreach ($deps as $dep)
+                            <a href="{{url('center_person/'.$dep->departs_id)}}" class="list-group-item list-group-item-action">
                               <div class="d-inline mr-25">
-                                  <i class="ft-info"></i>
+                                  <i class="ft-user"></i>
                               </div>
-                              Spam
+                            {{$dep->departs_name}}
                               <span class="badge badge-warning badge-pill badge-round float-right">3</span>
+                              @endforeach
                             </a>
                           </div>
                       </div>
@@ -399,6 +411,26 @@
       x[myIndex-1].style.display = "block";  
       setTimeout(carousel, 3000); // Change image every 2 seconds
     }
+
+
+    function startTime(){
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById("displayTime").innerHTML = h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+        function checkTime(i){
+            if(i < 10){
+            i = "0" + i
+            }
+            return i;
+        }
+        }
+
+
     </script>
 
 

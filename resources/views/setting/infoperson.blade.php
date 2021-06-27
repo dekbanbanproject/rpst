@@ -3,23 +3,7 @@
 
 @section('content')
 <?php
-function DateThai($strDate)
-    {
-    $strYear = date("Y",strtotime($strDate))+543;
-    $strMonth= date("n",strtotime($strDate));
-    $strDay= date("j",strtotime($strDate));
 
-    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-    $strMonthThai=$strMonthCut[$strMonth];
-    return "$strDay $strMonthThai $strYear";
-    }
-    function Removeformate($strDate)
-    {
-    $strYear = date("Y",strtotime($strDate));
-    $strMonth= date("m",strtotime($strDate));
-    $strDay= date("d",strtotime($strDate));  
-    return $strDay."/".$strMonth."/".$strYear;
-    }
     date_default_timezone_set("Asia/Bangkok");
     $date = date('Y-m-d');
     use App\Http\Controllers\ConfigController;  
@@ -60,6 +44,7 @@ function DateThai($strDate)
                                                 <th class="border-top-0">picture</th>
                                                 <th class="border-top-0">สิทธิ์การใช้งาน</th>
                                                 <th class="border-top-0">ตำแหน่ง</th>
+                                                <th class="border-top-0">แผนก</th>
                                                 <th class="border-top-0">วันที่</th>
                                                 <th class="border-top-0">Manage</th>
                                             </tr>
@@ -112,6 +97,7 @@ function DateThai($strDate)
                                                         </ul>
                                                     </td>
                                                     <td class="text-truncate">{{$u->POSIT_NAME}}</td>
+                                                    <td class="text-truncate">{{$u->departs_name}}</td>
                                                     <td class="text-truncate">{{Datethai($u->updated_at)}}</td>
                                                     {{-- <td class="text-padding">
                                                         <div class="float-left"> 
@@ -160,7 +146,8 @@ function DateThai($strDate)
                                                                           
                                                                         </div>
                                                                     </div>
-
+                                                                                                                               
+                                                                {{-- <div class="row">   --}}
                                                   
                                                                     <div class="col-sm-3">
                                                                         <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/read.png') }}" alt="Avatar"  width="60" height="60"><br><br>
@@ -314,28 +301,40 @@ function DateThai($strDate)
                                                                                 </div>
                                                                             </div>   
                                                                         </div>
-                                                                        <div class="col-md-4">
-                                                                            <label>Line Token: </label>
+
+                                                                       
+                                                                        <div class="col-md-4">                                           
+                                                                            <label>ตำแหน่ง: </label>
                                                                             <div class="form-group position-relative has-icon-left">
-                                                                                <input type="text" placeholder="" class="form-control" id="linetoken" name="linetoken" value="{{$u->linetoken}}">
+                                                                                <select class="form-control" id="position" name="position" required>
+                                                                                    <option value="">--กรุณาเลือก--</option>
+                                                                                    @foreach ($posits as $p)
+                                                                                    @if ($u->position == $p->POSIT_ID)
+                                                                                    <option value="{{$p->POSIT_ID}}" selected>{{$p->POSIT_NAME}}</option>
+                                                                                    @else
+                                                                                    <option value="{{$p->POSIT_ID}}">{{$p->POSIT_NAME}}</option>
+                                                                                    @endif
+                                                                                      
+                                                                                    @endforeach
+                                                                            </select>
                                                                                 <div class="form-control-position">
-                                                                                    <i class="la la-comment font-large-0 line-height-1 text-muted icon-align"></i>
+                                                                                    <i class="la la-shield font-large-0 line-height-1 text-muted icon-align"></i>
                                                                                 </div>
-                                                                            </div>                                
-                                                                        </div>
+                                                                            </div>                                         
+                                                                        </div>      
                                                                     </div>  
                                                                   
-                                                              <div class="row">                                       
-                                                                <div class="form-group col-4 mb-2">                                           
-                                                                    <label>ตำแหน่ง: </label>
-                                                                    <div class="form-group position-relative has-icon-left">
-                                                                        <select class="form-control" id="position" name="position" required>
+                                                              <div class="row">  
+                                                                <div class="col-md-4">                                           
+                                                                    <label>แผนก: </label>
+                                                                    <div class="form-group dep-relative has-icon-left">
+                                                                        <select class="form-control" id="dep" name="dep" required>
                                                                             <option value="">--กรุณาเลือก--</option>
-                                                                            @foreach ($posits as $p)
-                                                                            @if ($u->position == $p->POSIT_ID)
-                                                                            <option value="{{$p->POSIT_ID}}" selected>{{$p->POSIT_NAME}}</option>
+                                                                            @foreach ($deps as $d)
+                                                                            @if ($u->dep == $d->departs_id)
+                                                                            <option value="{{$d->departs_id}}" selected>{{$d->departs_name}}</option>
                                                                             @else
-                                                                            <option value="{{$p->POSIT_ID}}">{{$p->POSIT_NAME}}</option>
+                                                                            <option value="{{$d->departs_id}}">{{$d->departs_name}}</option>
                                                                             @endif
                                                                               
                                                                             @endforeach
@@ -344,8 +343,22 @@ function DateThai($strDate)
                                                                             <i class="la la-shield font-large-0 line-height-1 text-muted icon-align"></i>
                                                                         </div>
                                                                     </div>                                         
-                                                                </div>                         
-                                                                                            
+                                                                </div>      
+                                                                <div class="col-md-8">
+                                                                    <label>Line Token: </label>
+                                                                    <div class="form-group position-relative has-icon-left">
+                                                                        <input type="text" placeholder="" class="form-control" id="linetoken" name="linetoken" value="{{$u->linetoken}}">
+                                                                        <div class="form-control-position">
+                                                                            <i class="la la-comment font-large-0 line-height-1 text-muted icon-align"></i>
+                                                                        </div>
+                                                                    </div>                                
+                                                                </div>
+                                                            </div>    
+                                                            <br>  
+                                                            <div class="row">  
+                                                                <div class="form-group col-sm-2 mb-2">
+                                                                    
+                                                                </div> 
                                                                 <div class="form-group col-sm-2 mb-2">
                                                                     <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/admin.png') }}" alt="Avatar" width="40" height="40"><br><br>
                                                                     {{-- <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                     
@@ -353,9 +366,9 @@ function DateThai($strDate)
                                                                     </div> --}}
                                                                     @if ($u->admin == '')
                                                                     <input type="checkbox" class="form-check-input" id="admin" name="admin" >
-                                                                @else
-                                                                    <input type="checkbox" class="form-check-input" id="admin" name="admin" checked>                                                                               
-                                                                @endif  
+                                                                    @else
+                                                                        <input type="checkbox" class="form-check-input" id="admin" name="admin" checked>                                                                               
+                                                                    @endif  
                                                                 </div>                              
                                                                 <div class="form-group col-sm-2 mb-2">
                                                                     <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/read.png') }}" alt="Avatar"  width="40" height="40"><br><br>
@@ -497,33 +510,57 @@ function DateThai($strDate)
                                                     </div>
                                                 </div>   
                                             </div>
-                                            <div class="col-md-4">
-                                                <label>Line Token: </label>
+                                            <div class="form-group col-4 mb-2">                                           
+                                                <label>ตำแหน่ง: </label>
                                                 <div class="form-group position-relative has-icon-left">
-                                                    <input type="text" placeholder="" class="form-control" id="linetoken" name="linetoken" >
+                                                    <select class="form-control" id="position" name="position" required>
+                                                        <option value="">--กรุณาเลือก--</option>
+                                                        @foreach ($posits as $p)
+                                                            <option value="{{$p->POSIT_ID}}">{{$p->POSIT_NAME}}</option>
+                                                        @endforeach
+                                                    </select>
                                                     <div class="form-control-position">
-                                                        <i class="la la-comment font-large-0 line-height-1 text-muted icon-align"></i>
+                                                        <i class="la la-shield font-large-0 line-height-1 text-muted icon-align"></i>
                                                     </div>
-                                                </div>                                
-                                            </div>
+                                                </div>
+                                            </div>    
                                         </div>                                                                                  
                                 
-                                    <div class="row">                                       
-                                        <div class="form-group col-4 mb-2">                                           
-                                            <label>ตำแหน่ง: </label>
-                                            <div class="form-group position-relative has-icon-left">
-                                                <select class="form-control" id="position" name="position" required>
+                                    <div class="row">   
+                                        <div class="col-md-4">                                           
+                                            <label>แผนก: </label>
+                                            <div class="form-group dep-relative has-icon-left">
+                                                <select class="form-control" id="dep" name="dep" required>
                                                     <option value="">--กรุณาเลือก--</option>
-                                                    @foreach ($posits as $p)
-                                                        <option value="{{$p->POSIT_ID}}">{{$p->POSIT_NAME}}</option>
+                                                    @foreach ($deps as $d)                                                       
+                                                    <option value="{{$d->departs_id}}">{{$d->departs_name}}</option>                                                                                                                 
                                                     @endforeach
                                                 </select>
                                                 <div class="form-control-position">
                                                     <i class="la la-shield font-large-0 line-height-1 text-muted icon-align"></i>
                                                 </div>
                                             </div>                                         
-                                        </div>                         
+                                        </div>  
+
+                                        <div class="col-md-8">
+                                            <label>Line Token: </label>
+                                            <div class="form-group position-relative has-icon-left">
+                                                <input type="text" placeholder="" class="form-control" id="linetoken" name="linetoken" >
+                                                <div class="form-control-position">
+                                                    <i class="la la-comment font-large-0 line-height-1 text-muted icon-align"></i>
+                                                </div>
+                                            </div>                                
+                                        </div>
+                                    </div>  
+                                 
+                                        <br>  
+                                        
+                                        
+
+                                    <div class="row"> 
+                                        <div class="form-group col-sm-2 mb-2">
                                                                     
+                                        </div>
                                         <div class="form-group col-sm-2 mb-2">
                                             <img class="media-object rounded-circle" src="{{ asset('app-assets/images/permise/admin.png') }}" alt="Avatar" width="40" height="40"><br><br>
                                             <div class="form-check form-check-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                     

@@ -35,6 +35,7 @@ class StoreSettingController extends Controller
             $data = User::where('id','=',session('LogedUser'))->first();
             }
         $user = User::leftJoin('positions','users.position','=','positions.POSIT_ID')
+        ->leftJoin('departs','users.dep','=','departs.departs_id')
         ->get();
         $usercount = User::count();
         $pocount = Position::count();
@@ -110,6 +111,7 @@ class StoreSettingController extends Controller
             $add->password = $request->password;
             $add->linetoken = $request->linetoken;
             $add->position = $request->position;
+            $add->dep = $request->dep;
             $add->admin = $request->admin;
             $add->read = $request->read;
             $add->write = $request->write;
@@ -142,6 +144,7 @@ class StoreSettingController extends Controller
             $update->password = Hash::make($request->password);
             $update->linetoken = $request->linetoken;
             $update->position = $request->position;
+            $update->dep = $request->dep;
             $update->admin = $request->admin;
             $update->read = $request->read;
             $update->write = $request->write;

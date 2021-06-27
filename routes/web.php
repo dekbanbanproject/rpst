@@ -34,8 +34,10 @@ Route::resource('first', 'FirstController');
 //****************************** Font obt *******************************//
 Route::get('/',[FontobtController::class,'welcome'])->name('Per.welcome');
 Route::get('module_show/{id}',[FontobtController::class,'module_show'])->name('obt.module_show');
+Route::get('obt_main_contacts',[FontobtController::class,'obt_main_contacts'])->name('obt.obt_main_contacts');
+Route::post('obt_main_contacts_save',[FontobtController::class,'obt_main_contacts_save'])->name('obt.obt_main_contacts_save');
+Route::get('center_person/{id}',[FontobtController::class,'center_person'])->name('obt.center_person');
 
-Route::get('mcontact',[FontendController::class,'mcontact'])->name('Per.mcontact');
 Route::get('login',[QrLoginController::class,'login']);
 Route::get('register',[QrLoginController::class,'register']);
 Route::get('logout',[QrLoginController::class,'logout']);
@@ -109,6 +111,9 @@ Route::get('switchactive_quality',[BackobtqualityController::class,'switchactive
 Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // ******** dashboard_obt ***********//
 
 Route::get('dashboard_obt',[BackobtController::class,'dashboard_obt']); // ******** dashboard_obt ***********//
+Route::get('back_obt/contacts',[BackobtController::class,'contacts'])->name('obt.contacts'); // ******** ร้องเรียน ***********//
+Route::get('switchactive_contact',[BackobtController::class,'switchactive_contact'])->name('obt.switchactive_contact');
+Route::get('back_obt/contact_delete/{id}',[BackobtController::class,'contact_delete'])->name('obt.contact_delete');
 
 Route::get('/uploadpic',[PictureController::class,'index']); // ******** pagepicture_slide upload ***********//
 Route::post('/upload/store',[PictureController::class,'store'])->name('obt.upload_store'); 

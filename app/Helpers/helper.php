@@ -2,44 +2,8 @@
 use App\Models\Person;
 use App\Models\Org;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 //เมื่อมีการเพิ่ม Function ใหม่ให้สั้ง composer dump-autoload
-
-// function changeDateFormate($date,$date_format){
-//     return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($date_format);    
-// }
-   
-// function productImagePath($image_name)
-// {
-//     return public_path('images/products/'.$image_name);
-// }
-
-
-    // เก็บ log การเข้าใช้งานไปยัง datacenter
-// function logs($url,$type){
-//         $org = Org::find(1);
-
-//         try {
-//             // เก็บ log การเข้าใช้งานไปยัง datacenter
-//             $endpoint = $url;
-//             $client = new \GuzzleHttp\Client();
-//             $response = $client->request('post', $endpoint, ['query' => [
-//                 'type' => $type,
-//                 'hos_code' => $org->ORG_PCODE,
-//                 'hos_name' => $org->ORG_NAME,
-//                 'user_id' => Auth::id(),
-//                 'username' => Auth::user()->name,
-//                 'ip_gateway' => request()->ip(), 
-//                 'ip_client' => request()->ip(),
-//             ]]);
-//             $statusCode = $response->getStatusCode();
-//            $content = $response->getBody();
-
-//             // จบ=
-//             } catch (\Throwable $th) {
-//                             //throw $th;
-//             }
-//     }
-
 
 function formatSizeUnits($bytes)
 {
@@ -154,31 +118,6 @@ function convert($number){
     return $convert; 
     } 
 
-// Format Display วันที่
-// function formate($strDate)
-//     {
-//     if($strDate == '' || $strDate == null || $strDate == '0000-00-00'){
-
-//         $date = '';
-
-//     }else{
-
-//         $strYear = date("Y",strtotime($strDate));
-//         $strMonth= date("m",strtotime($strDate));
-//         $strDay= date("d",strtotime($strDate));
-//         $date = $strDay."/".$strMonth."/".$strYear;
-//     }
-    
-//     return $date;
-
-//     }
-    
-
-//     function formatetime($strtime)
-//     {
-//     $H = substr($strtime, 0, 5);
-//     return $H;
-//     }
 // รับค่าปีงบประมาณปัจจุบัน
 function getBudgetYear()
 {
@@ -216,21 +155,42 @@ function getAge($birthday)
 }
 
 // แปลงวันที่ภาษาไทย
-// function DateThai($strDate)
-// {
-//     if($strDate == '' || $strDate == null || $strDate == '0000-00-00'){
-//         $datethai = '';
-//     }else{
-//         $strYear = date("Y",strtotime($strDate))+543;
-//         $strMonth= date("n",strtotime($strDate));
-//         $strDay= date("j",strtotime($strDate));
-//         $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-//         $strMonthThai=$strMonthCut[$strMonth];
-//         $datethai = $strDate ? ($strDay.' '.$strMonthThai.' '.$strYear) : '-';
-//     }
-//     return $datethai;
-// }
+function DateThai($strDate)
+{
+    if($strDate == '' || $strDate == null || $strDate == '0000-00-00'){
+        $datethai = '';
+    }else{
+        $strYear = date("Y",strtotime($strDate))+543;
+        $strMonth= date("n",strtotime($strDate));
+        $strDay= date("j",strtotime($strDate));
+        $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+        $strMonthThai=$strMonthCut[$strMonth];
+        $datethai = $strDate ? ($strDay.' '.$strMonthThai.' '.$strYear) : '-';
+    }
+    return $datethai;
+}
+function Timeshow()
+{
+    $strDate = Carbon::now('Asia/Bangkok');
+    $strTime = date("H:i:s น.");  
+  
+    return $strTime;
+}
+function Datetime($time_a,$time_b)
+{
+    $now_time1=strtotime(date("Y-m-d ".$time_a));
+    $now_time2=strtotime(date("Y-m-d ".$time_b));
+    $time_diff=abs($now_time2-$now_time1);
+    $time_diff_h=floor($time_diff/3600); // จำนวนชั่วโมงที่ต่างกัน
+    $time_diff_m=floor(($time_diff%3600)/60); // จำวนวนนาทีที่ต่างกัน
+    $time_diff_s=($time_diff%3600)%60; // จำนวนวินาทีที่ต่างกัน
+   
+    return $time_diff_h." ชม. ".$time_diff_m." น. ";
+  
+    }
+  
 
+    $datenow = date('Y-m-d');
 function DatetimeThai($strDate)
 {
     if($strDate == '' || $strDate == null || $strDate == '0000-00-00 00:00:00'){

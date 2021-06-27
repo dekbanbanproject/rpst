@@ -24,7 +24,8 @@ use App\Models\Pageleftmodule_sub;
 use App\Models\Page_group;
 use App\Models\Layout;
 use App\Models\Page_slidepicture;
-
+use App\Models\Quality;
+use App\Models\Contact;
 use Image;
 use PDF;
 
@@ -54,7 +55,49 @@ class BackobtController extends Controller
           'pageModulecount'=>$pageModulecount,'pagegroupcount'=>$pagegroupcount,
         ]);
     }
+//==========================================================//
+public function contacts(Request $request)
+{
+  if (session()->has('LogedUser')) {
+    $data = User::where('id','=',session('LogedUser'))->first();
+    }
 
+        $page1 = Pageleft_one::count();
+        $page2 = Pageleft_two::count();
+        $page3 = Pageleft_tree::count();
+        $page4 = Pageleft_four::count();
+        $page5 = Pageleft_five::count();
+        $pageModulecount = Pageleftmodule::count();
+        $pagegroupcount = Page_group::count();
+      
+        $posit = Position::get();
+        $page = Pageleft_two::get();
+        $pageModule = Pageleftmodule::get();
+        $pagegroup = Page_group::get();
+        $pagegroupright = Page_group::where('group_type', '=','2')->get();
+        $con = Contact::get();
+
+  return view('back_obt.contacts',[
+    'data'=>$data,'posits'=>$posit,'pages'=>$page,'pagegroups'=>$pagegroup,'pagegrouprights'=>$pagegroupright,         
+    'page1'=>$page1, 'page2'=>$page2, 'page3'=>$page3, 'page4'=>$page4,
+    'page5'=>$page5, 'pagegroupcount'=>$pagegroupcount, 'pageModules'=>$pageModule,
+    'pageModulecount'=>$pageModulecount,'cons'=>$con,
+    ]);
+}
+
+function switchactive_contact(Request $request)
+{
+    $id = $request->contact;
+    $active = Contact::find($id);
+    $active->status = $request->onoff;
+    $active->save();
+}
+
+function contact_delete(Request $request,$id)
+{
+    Contact::destroy($id);
+    return redirect()->route('obt.contacts');
+}
 //==========================================================//
     function pagepicture_slide(Request $request)
     {
